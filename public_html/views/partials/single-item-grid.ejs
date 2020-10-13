@@ -1,0 +1,131 @@
+<!-- single-item-grid.ejs -->
+
+<!--What variables needed to pass in?
+    For display:
+    - Item Title
+    - Item Price
+    - Item image
+    - Single Item URL
+
+    For post if add to cart:
+    - Price/Name
+    - Item ID?
+    - URL?
+    - Health Score?
+-->
+
+<style>
+.hover-shine.column {
+    border: 1px solid #c0bebe;
+}
+.hover-shine figure {
+    position: relative;
+}
+.hover-shine figure::before {
+    position: absolute;
+    top: 0;
+    left: -75%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+}
+.hover-shine figure:hover::before,.sinlge-item:hover .hover-shine figure::before{
+    -webkit-animation: shine .75s;
+    animation: shine .75s;
+}
+@-webkit-keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+@keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+
+.single-item-grid-outer {
+    position: relative;
+    display: block;
+}
+.column div.single-item-grid-outer {
+    position: relative;
+    margin:0;
+}
+.single-item-grid-outer figure {
+    margin: 0;
+    padding: 0;
+    background:transparent;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.single-tiem-grid-inner img {
+   max-width: 100% ! important ;
+}
+.single-tiem-grid-inner p {
+    font-size: 13px;
+}
+.single-tiem-grid-inner img{
+    margin:0 auto;
+    align-self: center;
+    display: block;
+}
+.single-tiem-grid-inner p{
+    color:#212121;
+    margin:1.5em 0 1em;
+    line-height:1.5em;
+    text-transform:capitalize;
+    font-size:14px;
+    text-align: center;
+}
+.single-tiem-grid-inner h4,.agileinfo_single_right_snipcart h4{
+    font-weight:600;
+    font-size:1em;
+    color:#212121;
+    text-align: center;
+}
+.single-tiem-grid-inner h4 span,.agileinfo_single_right_snipcart h4 span{
+    font-weight:300;
+    margin: auto 0;
+    font-style: bold;
+}
+
+.item-details {
+    text-align: center;
+    margin: 1.5em auto 1em;
+    width: 77%;
+}
+</style>
+
+
+<div class="col-md-4 single-item">
+<div class="hover-shine column">
+  <div class="single-item-grid-outer">
+    <div class="single-tiem-grid-inner">
+      <figure>
+            <a href="<%= item_url %>"><img title="<%= item_title %>" alt="<%= item_title %>" src="img/product.png"></a>  
+            <p><%= item_title %></p>
+            <h4><span><%= item_price %></span></h4>
+          <div class="item-details">
+            <form action="#" method="post">
+              <fieldset>
+                <input type="hidden" name="cmd" value="cart">
+                <input type="hidden" name="add" value="1">
+                <input type="hidden" name="item_name" value="<%= item_title %>">
+                <input type="hidden" name="amount" value="<%= item_price %>">
+                <input type="submit" name="submit" value="Add to cart" class="button">
+              </fieldset>
+            </form>
+          </div>
+      </figure>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,78 @@
+-- in user table differentiate between friedman study and turk users?
+CREATE TABLE IF NOT EXISTS users (
+  user_id    int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  username   varchar(50) NOT NULL,
+  password   varchar(255) NOT NULL,
+  version    int(11) NOT NULL,
+  created_at timestamp NOT NULL DEFAULT current_timestamp,
+  cart_id    int(11) DEFAULT 0,
+  session    int(11) NOT NULL
+);
+-- INSERT INTO users (username, password, version, cart_id, session)
+-- VALUES ('sammy', 'password', 1, 1, 1);
+
+CREATE TABLE IF NOT EXISTS categories (
+  id        int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  name      varchar(255) NOT NULL,
+  parent_id integer references categories(id)
+);
+
+
+-- need to update this to have size and per unit cost
+CREATE TABLE IF NOT EXISTS products (
+    product_id   int PRIMARY KEY AUTO_INCREMENT,
+    name         varchar(1000) NOT NULL,
+    price        decimal(18,2) NOT NULL,
+    image        varchar(255)  NOT NULL,
+    size         varchar(255) NOT NULL,
+    unit_price   varchar(255) NOT NULL,
+    category     varchar(255) references categories(name),
+    subcategory  varchar(255) references categories(name),
+    health_score int NOT NULL DEFAULT 0
+);
+
+LOAD DATA LOCAL INFILE "./products.csv"
+INTO TABLE products
+COLUMNS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+ESCAPED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+-- mysqlimport -u nutritionStudy -h mysql-user.eecs.tufts.edu -p --ignore-lines=1 --lines-terminated-by='\n' --fields-terminated-by=',' --fields-enclosed-by='"' nutritionStudy products.csv
+
+
+-- INSERT INTO products   ( name, unit_price, description, img_url)
+--              VALUES    ( 'Horizon Organic Whole Vitamin D Milk', 6.99, "no description", 'https://i5.peapod.com/c/9T/9TIEJ.jpg');
+-- INSERT INTO products   ( name, unit_price, description, img_url)            
+--              VALUES    ( 'Lactaid 2% Reduced Fat Milk Calcium Enriched 100% Lactose Free', 4.29, "no description", 'https://i5.peapod.com/c/ZM/ZMNP2.jpg');
+-- INSERT INTO products   ( name, unit_price, description, img_url)          
+--              VALUES    ( 'Fairlife 2% Reduced Fat Chocolate Ultra-Filtered Milk Lactose Free', 2.49, "no description", 'https://i5.peapod.com/c/KG/KGBR6.jpg');
+-- INSERT INTO products   ( name, unit_price, description, img_url)
+--              VALUES    ( 'Stonyfield Fat Free Milk Organic', 4.49, "no description", 'https://i5.peapod.com/c/G6/G6WFJ.jpg');
+-- INSERT INTO products   ( name, unit_price, description, img_url)
+--              VALUES    ( 'Horizon Whole Vitamin D Milk Organic Unrefrigerated', 4.19, "no description", 'https://i5.peapod.com/c/S3/S3OCF.jpg');
+-- INSERT INTO products   ( name, unit_price, description, img_url)
+--              VALUES    ( 'Nestle Nesquik Low Fat Chocolate Milk', 1.19, "no description", 'https://i5.peapod.com/c/5V/5VY5R.jpg');
+-- INSERT INTO products   ( name, unit_price, description, img_url) 
+--              VALUES    ( 'Deans Dairy Pure Whole Vitamin D Milk', 6.99, "no description", 'https://i5.peapod.com/c/7X/7XYKK.jpg');
+-- INSERT INTO products   ( name, unit_price, description, img_url)
+--              VALUES    ( 'Lifeway 1% Low Fat Kefir Probiotic Cultured Milk Plain', 4.24, "no description", 'https://i5.peapod.com/c/N5/N5GQF.jpg');
+
+CREATE TABLE IF NOT EXISTS carts
+(
+    cart_id      int PRIMARY KEY AUTO_INCREMENT,
+    user_id      int REFERENCES users(user_id),
+    total_count  int NOT NULL DEFAULT 0,
+    checked_out  bit NOT NULL DEFAULT 0,
+    health_total int NOT NULL DEFAULT 0
+);
+-- INSERT INTO carts (user_id) VALUES (1);
+
+
+CREATE TABLE IF NOT EXISTS cart_items
+(
+    cart_id      int references carts(cart_id),    
+    product_id   int references products(product_id),
+    item_count   int not null,
+    PRIMARY KEY  (cart_id, product_id)
+);

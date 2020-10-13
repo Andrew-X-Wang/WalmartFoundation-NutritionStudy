@@ -1,0 +1,48 @@
+UPC Hit Rate Stats by Category
+Category Coffee tea water results:
+{'hits': 2, 'misses': 55, 'rate': 0.035}
+
+Category Baking ingredients results:
+{'hits': 3, 'misses': 18, 'rate': 0.142}
+
+Category Spreads dips results:
+{'hits': 7, 'misses': 48, 'rate': 0.127}
+
+Category Snacks results:
+{'hits': 13, 'misses': 94, 'rate': 0.121}
+
+Category Seasonings results:
+{'hits': 1, 'misses': 37, 'rate': 0.026}
+
+Category Produce results:
+{'hits': 64, 'misses': 306, 'rate': 0.172}
+
+Category Prepared meals results:
+{'hits': 10, 'misses': 135, 'rate': 0.068}
+
+Category Oil vinegar dressing results:
+{'hits': 1, 'misses': 36, 'rate': 0.027}
+
+Category Meats results:
+{'hits': 5, 'misses': 84, 'rate': 0.056}
+
+Category Legumes and nuts results:
+{'hits': 9, 'misses': 37, 'rate': 0.195}
+
+Category Grains results:
+{'hits': 11, 'misses': 126, 'rate': 0.080}
+
+Category Fish and seafood results:
+{'hits': 3, 'misses': 23, 'rate': 0.115}
+
+Category Drinks results:
+{'hits': 5, 'misses': 102, 'rate': 0.046}
+
+Category Dairy and eggs results:
+{'hits': 32, 'misses': 148, 'rate': 0.177}
+
+Category Desserts results:
+{'hits': 20, 'misses': 161, 'rate': 0.110}
+
+Category Condiments results:
+{'hits': 0, 'misses': 54, 'rate': 0.0}

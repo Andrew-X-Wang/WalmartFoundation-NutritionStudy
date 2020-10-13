@@ -1,0 +1,56 @@
+var express  = require('express');
+var router   = express.Router();
+
+/************** GET routes: *************
+* - Index
+* - Login 
+* - Registration
+* - Browse-Aisles
+* - Sample-Aisle
+*/
+function auth (req, res, next) {
+
+    if (req.session.loggedin) {
+        res.header('Cache-Control', 
+        'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+        return next();
+    }
+
+    res.redirect('/login');
+}
+
+router.get('/', auth, function(req, res) {
+
+    res.render('index.ejs', 
+        { header     : "Home", 
+          cart_count : req.session.cart_count });
+});
+
+/* Login */
+//CHECK IF LOGGED IN
+router.get('/login', function(req, res){
+
+    res.render('login.ejs', 
+        { header     : "Welcome", 
+          cart_count : 0 });
+});
+
+/* Registration */
+router.get('/registration', function(req, res){
+
+  res.render('registration.ejs', 
+        { header: "Create Account",
+          cart_count : 0 });
+});
+
+/* Browse-Aisles */
+router.get('/browse-aisles', auth, function(req, res) {
+
+    res.render('browse-aisles.ejs', 
+        { header     : "Browse Aisles", 
+          cart_count : req.session.cart_count,
+          filter     : "default" });
+});
+
+
+module.exports = router;

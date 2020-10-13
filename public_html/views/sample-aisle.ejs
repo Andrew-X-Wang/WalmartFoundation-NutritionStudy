@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <%- include partials/header.ejs %>
+</head>
+<body>
+<!-- header -->
+        <%- include('partials/topnav', {header: header}); %>
+
+<!-- <% for (var i = 0; i < listItems.length; i++) {%>
+    <p><%=listItems[i].listDescription%></p>
+<%} %> -->
+
+<!-- Shopping List Modal Window -->
+<div class="modal fade" id="shoppingModal" tabindex="-1" role="dialog" aria-labelledby="modalShopping" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        Cross Item Off Your Shopping List!
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <% for (var i = 0; i < listItems.length; i++) {%>
+          <div class="custom-control custom-radio">
+          <label>
+              <input type="radio" name="customRadio" id="<%=listItems[i].listDescription%>" value="<%=listItems[i].listDescription%>"> <%=listItems[i].listDescription%>
+          </label>
+          </div>
+          <!-- <p><%=listItems[i].listDescription%></p> -->
+        <%} %>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="modal_button" class="btn btn-primary" onclick="passData()" data-dismiss="modal">Finish Adding</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingModal">
+  Shopping List
+</button> -->
+
+
+<!-- Item Detail Modal Window -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal_title" id="modalLabel">Item Detail</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="modal_left-column modal_content--scrollable modal_no-padding">
+              <div>
+                <div class="product-basic-details">
+                  <div class="product-half-column">
+                    <img id="imgInput" style="display: block; margin-right: auto; margin-left: auto; height: 12rem;">
+                    <div class="product-thumbnail-wrapper">
+                      <div class="product-detail-thumbnail-carousel">
+                        <div class="product-thumbnail-image">
+                          <img class="carousel-image" id="c1">
+                        </div>
+                        <div class="product-thumbnail-image">
+                          <img class="carousel-image" id="c2">
+                        </div>
+                        <div class="product-thumbnail-image">
+                          <img class="carousel-image" id="c3">
+                        </div>
+                        <div class="product-thumbnail-image">
+                          <img class="carousel-image" id="c4">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="product-half-column">
+                    <div class="product-title-price">
+                      <div>
+                        <div class="nameInput" style="font-weight: 450; width: 100%; font-size: 1.8rem; line-height: 2.7rem;"></div>
+                        <div class="product-detail-rating">Insert Rating</div>
+                      </div>
+                      <div class="product-price-cart">
+                        <div class="product-price-info">
+                          <div class="priceInput"></div>
+                          <div class="unitPriceInput"></div>
+                        </div>
+                        <div class="modal_add-button">
+                          <button class = "button add_cart"> Add to Cart </button>
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingModal" onclick="toggleFunc()">
+                            Shopping List
+                          </button> <!-- test -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="information-header">
+                  <h3 class="info-header-title">Information</h3>
+                </div>
+                <div class="product-basic-details">
+                  <div class="product-half-column">
+                    <div>
+                      <h3 class="product-detail-heading">Nutrition</h3>
+                      <div class="nutrition-quick-facts">
+                        <div class="nutrition-quick-facts_single">
+                          <div class="calInput"></div>
+                          <span style="text-transform: uppercase;">Calories</span>
+                        </div>
+                        <div class="nutrition-quick-facts_single">
+                          <div class="satfatInput"></div>
+                          <span style="text-transform: uppercase;">Sat Fat</span>
+                        </div>
+                        <div class="nutrition-quick-facts_single">
+                          <div class="sodInput"></div>
+                          <span style="text-transform: uppercase;">Sodium</span>
+                        </div>
+                        <div class="nutrition-quick-facts_single">
+                          <div class="sugInput"></div>
+                          <span style="text-transform: uppercase;">Sugars</span>
+                        </div>                        
+                      </div>
+                    </div>
+                    <div class="product-nutrition-facts-details">
+                      <h5 class="product-detail-heading">Nutrition Facts</h5>
+                        <div class="serving-info">
+                          <dt class="horizontal-row">Serving Size</dt>
+                          <dd class="horizontal-row value">info</dd>
+                          <dt class="horizontal-row">Servings Per Container</dt>
+                          <dd class="horizontal-row value">info</dd>
+                        </div>
+                      <h5 class="section-title">Amount Per Serving</h5>
+                        <div class="serving-info">
+                          <dt class="horizontal-row">Calories</dt>
+                          <dd class="horizontal-row value">info</dd>
+                          <dt class="horizontal-row">Calories from Fat</dt>
+                          <dd class="horizontal-row value">info</dd>
+                        </div>
+                      <h5 class="section-title title-daily">% Daily Value*</h5>
+                        <div class="serving-info">
+                          <div class="nutrition-subsection">
+                            <dt class="horizontal-row">Total Fat</dt>
+                            <dd class="horizontal-row value">info</dd>
+                            <dt class="horizontal-row row-indent">Saturated Fat</dd>
+                            <dd class="horizontal-row value">info</dd>
+                            <dt class="horizontal-row row-indent">Trans Fat</dt>
+                            <dd class="horizontal-row value">info</dd>
+                          </div>
+                          <div class="nutrition-subsection">
+                            <dt class="horizontal-row">Cholesterol</dt>
+                            <dd class="horizontal-row value">info</dd>
+                          </div>
+                          <div class="nutrition-subsection">
+                            <dt class="horizontal-row">Sodium</dt>
+                            <dd class="horizontal-row value">info</dd>
+                          </div>
+                          <div class="nutrition-subsection">
+                            <dt class="horizontal-row">Potassium</dt>
+                            <dd class="horizontal-row value">info</dd>
+                          </div>
+                          <div class="nutrition-subsection">
+                            <dt class="horizontal-row">Total Carbohydrate</dt>
+                            <dd class="horizontal-row value">info</dd>
+                            <dt class="horizontal-row row-indent">Dietary Fiber</dd>
+                            <dd class="horizontal-row value">info</dd>
+                            <dt class="horizontal-row row-indent">Sugars</dt>
+                            <dd class="horizontal-row value">info</dd>
+                          </div>
+                          <dt class="horizontal-row">Protein</dt>
+                          <dd class="horizontal-row value">info</dd>
+                        </div>
+                        <div style="font-size: 0.8rem;">* Percent Daily Values are based on a 2,000 calorie diet.</div>
+                    </div>
+                    <div>Ingredients</div>
+                    <div>Warnings</div>
+                    <div>Product Disclaimer</div>
+                  </div>
+
+                  <div class="product-half-column">
+                    <h3 class="product-detail-heading">If Unavailable</h3>
+                    <h3 class="product-detail-heading">Details</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+              
+            <div class="modal_right-column modal_content--scrollable">
+              <div>
+                <h6 class="product-detail-heading">Sponsored Suggestions</h6>
+              </div>
+              <div>
+                <h6 class="product-detail-heading">You Might Like</h6>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- include breadcrumbs? must decide. -->
+<!--products -->
+  <div class="products">
+      <%include partials/sidenav.ejs%>
+      <div class = "product-right-container">
+      <div class = "products-right" style="display: table-cell; width: 80%; vertical-align: top">
+      <div class = "products-right-grid">
+          <div class="products-right-grids">
+            <div class="sorting">
+              <select id="filter" onchange="new_filter(this.value)">
+                <option value="health_score">
+                  <i class="fa fa-arrow-right" aria-hidden="true"></i>Default sorting</option>
+                <option value="name">
+                  <i class="fa fa-arrow-right" aria-hidden="true"></i>Sort alphabetically</option>         
+                <option value="price">
+                  <i class="fa fa-arrow-right" aria-hidden="true"></i>Sort by price</option>               
+              </select>
+            </div>
+            <div class="clearfix"> </div>
+          </div>
+        </div>
+        <% for(var i=0; i < items.length; i++) {%>
+          <% if(i % 4 == 0){ %>
+            <div class="agile_top_brands_grids">
+          <% } %>
+              <div class="col-md-3 single-item">
+              <div class="hover-shine column">
+                <div class="single-item-grid-outer">
+                  <div class="single-item-grid-inner">
+                    <figure>
+                      <a href="#" class="itemDetailWindow" data-target="#exampleModal" data-toggle="modal" 
+                        data-info="<%= items[i] %>" 
+                        data-name="<%= items[i].name %>" 
+                        data-price="<%=items[i].price %>" 
+                        data-img="<%=  items[i].image %>"
+                        data-size="<%= items[i].size %>"
+                        data-unit="<%= items[i].unit_price %>"
+                        data-servunit="<%=items[i].serving_unit %>"
+                        data-cal="<%=  items[i].calories %>"
+                        data-satfat="<%=  items[i].saturated_fat %>"
+                        data-sodium="<%=  items[i].sodium %>"
+                        data-sugar="<%=  items[i].sugars %>">
+                        <img title="<%= items[i].name %>" 
+                              alt=" <%= items[i].name %>" 
+                              src=" <%= items[i].image %>">    
+                        <div class = "item_title"> <%=items[i].name       %></div>
+                        <div class = "item_price"> $<%=items[i].price %></div>
+                      </a>
+                      <div data-id    = "<%= items[i].product_id  %>" 
+                           data-name  = "<%= items[i].name       %>"
+                           data-price = "<%= items[i].price %>"
+                           data-img   = "<%  items[i].image %>" class="item-details">
+                           <button class = "button add_cart"> Add to Cart </button>
+                      </div>
+                    </figure>
+                  </div>
+                </div>
+                </div>
+                </div>
+          <% if(i % 4 == 3 || i == items.length - 1){ %>
+                <div class="clearfix"> </div>
+                </div>%> <% } %>
+          <% } %>
+      
+      </div>
+
+      <div class="clearfix"> </div>
+      <nav class="numbering">
+          <ul class="pagination paging">
+          </div>
+            <% if (pages > 0) { %>
+                <!-- can use : href: javascript:function(values) -->
+                <ul class="pagination text-center">
+                    <% var i = (Number(current_page) > 5 ? Number(current_page) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current_page) + 4) && i <= pages; i++) { %>
+                        <% if (i == current_page) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li>
+                             <a href="?filter=<%=filter%>&page=<%=i%>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current_page) + 4 && i < pages) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current_page == pages) { %>
+                        <li class="disabled"><a>Last</a></li>
+                    <% } else { %>
+                        <li>
+                          <a href="?filter=<%=filter%>&page=<%=pages%>"><%=pages%></a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+          </div>
+    </div>
+  </div>
+<!-- //footer -->
+<%include partials/footer.ejs%>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+<script>
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:8000"
+
+function PostRequest() {
+  var request;
+
+  this.makeRequest = function(endpoint, data, callback) {
+    request = new XMLHttpRequest();
+    request.open("POST", requestURL + "/" + endpoint, true);
+
+    request.onreadystatechange = 
+            function () {
+              if(request.readyState === 4 && request.status === 200) {
+              console.log("done with good request");
+              callback(request);}
+            }
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send(data);
+  }
+}
+
+function GetRequest() {
+  var request;
+
+  this.makeRequest = function(endpoint, callback) {
+    request = new XMLHttpRequest();
+
+    request.onreadystatechange = 
+            function () {
+              if(request.readyState === 4 && request.status === 200) {
+              console.log("done with good request");
+              callback(request);}
+            }
+
+    console.log(requestURL + endpoint)        
+    request.open("GET", requestURL + "/" + endpoint, true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send(null);
+  }
+}
+
+
+$('.item-details button').click( function() {
+    var item = $(this).parent();
+    //$("#shoppingModal").modal();
+    // console.log($selectedRadio)
+    add_to_cart(item);
+});
+
+// source: https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
+$('.itemDetailWindow').click( function() {
+  var nameDeet = $(this).data('name');
+  var priceDeet = $(this).data('price');
+  var imgDeet = $(this).data('img');
+
+  var c1Deet = $(this).data('img');
+  var c2Deet = 'http://www.clker.com/cliparts/I/c/0/r/7/F/carrot-md.png';
+  var c3Deet = 'http://www.clker.com/cliparts/I/c/0/r/7/F/carrot-md.png';
+  var c4Deet = 'http://www.clker.com/cliparts/I/c/0/r/7/F/carrot-md.png';
+
+  var modalImg = document.getElementById("imgInput");
+  var c1Img = document.getElementById("c1");
+  var c2Img = document.getElementById("c2");
+  var c3Img = document.getElementById("c3");
+  var c4Img = document.getElementById("c4");
+
+  var sizeDeet = $(this).data('size');
+  var unitDeet = $(this).data('unit');
+  var servUnitDeet = $(this).data('servunit');
+  var calDeet = $(this).data('cal');
+  var satfatDeet = $(this).data('satfat');
+  var sodiumDeet = $(this).data('sodium');
+  var sugarDeet = $(this).data('sugar');
+
+  $('.nameInput').html(nameDeet);
+  $('.priceInput').html('$' + priceDeet);
+  $('.unitPriceInput').html(sizeDeet + unitDeet);
+  $('.calInput').html(calDeet);
+  $('.satfatInput').html(satfatDeet);  
+  $('.sodInput').html(sodiumDeet);
+  $('.sugInput').html(sugarDeet);
+  modalImg.src = imgDeet;
+  c1Img.src = c1Deet;
+  c2Img.src = c2Deet;
+  c3Img.src = c3Deet;
+  c4Img.src = c4Deet;
+  // modalImg.src = 'http://www.clker.com/cliparts/I/c/0/r/7/F/carrot-md.png';
+})
+
+$('.product-thumbnail-image').click( function () {
+  var modalImg = document.getElementById("imgInput");
+  var imgDeet = $(this).find('img').attr('src');
+  modalImg.src = imgDeet;
+})
+
+
+function add_to_cart(item) {
+
+  var request = new PostRequest();
+
+  var data = "id="     + item.attr('data-id')   + 
+             "&name="  + item.attr('data-name') +
+             "&img="   + item.attr('data-img')  +
+             "&price=" + item.attr('data-price');
+
+  request.makeRequest("cart/add", data, function(request){
+
+      cart_count = request.responseText;
+
+      if (cart_count) {
+        if (cart_count == 0) {
+          $('.badge').text("");
+        } else {
+          $('.badge').text(cart_count);
+        }
+      }
+  });
+}
+
+function new_filter(filter) {
+
+  console.log(filter)
+  var path = window.location.pathname;
+
+  var search = "?filter=" + String(filter) + "&page=1"
+
+
+  var request_url = path + search
+
+  var change_filter = new GetRequest();
+
+
+  change_filter.makeRequest(request_url, function(request){
+    console.log("filter changed")
+  });
+}
+
+// $('submit').click(function() {
+//   var listChoice = document.querySelector('input[name="inlineRadioOptions"]:checked').value;
+//   alert(listChoice + ' was selected!');
+// });
+
+// broken
+// $('modal_button').click(function () {
+//   // var value = $("input:radio:checked").next().text();
+//   // console.log(value)
+//   // console.log("in click")
+//   // $('purpose_input').val(value);
+//   //$('#shoppingModal').modal('hide');
+
+//     var ele = document.getElementsByName('customRadio'); 
+      
+//     for(i = 0; i < ele.length; i++) { 
+//         if(ele[i].checked) 
+//         document.getElementById("purpose_input").innerHTML
+//                 = "Radio: "+ele[i].value; 
+//     } 
+        
+// });
+function passData() {
+  //alert(document.querySelector('input[name="customRadio"]:checked').value;)
+  var radios = document.getElementsByName('customRadio')
+  for (var i = 0; i < radios.length; i++) {
+     if (radios[i].checked) {
+
+       // Store the value for the selected radio 
+       // You can maybe redirected on another page and pass this variable
+       $selectedRadio = radios[i].value
+
+       //alert($selectedRadio);
+       break;
+     }
+   }
+   console.log($selectedRadio)
+   //document.getElementById('purpose_input').innerHTML = $selectedRadio
+}
+
+function toggleFunc() {
+  $("#exampleModal").modal('toggle')
+  $("#shoppingModal").modal('toggle');
+}
+
+</script>
+</body>
+</html>

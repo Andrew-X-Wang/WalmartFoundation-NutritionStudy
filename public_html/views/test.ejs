@@ -1,0 +1,24 @@
+<div class="col-md-4 single-item">
+<div class="hover-shine column">
+  <div class="single-item-grid-outer">
+    <div class="single-tiem-grid-inner">
+      <figure>
+            <a href="<%= item_url %>"><img title="<%= item_title %>" alt="<%= item_title %>" src="img/product.png"></a>  
+            <p><%= item_title %></p>
+            <h4><span><%= item_price %></span></h4>
+          <div class="item-details">
+            <form action="#" method="post">
+              <fieldset>
+                <input type="hidden" name="cmd" value="cart">
+                <input type="hidden" name="add" value="1">
+                <input type="hidden" name="item_name" value="<%= item_title %>">
+                <input type="hidden" name="amount" value="<%= item_price %>">
+                <input type="submit" name="submit" value="Add to cart" class="button">
+              </fieldset>
+            </form>
+          </div>
+      </figure>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <%- include partials/header.ejs %>
+</head>
+<body>
+<!-- header / top nav -->
+	<%- include partials/topnav.ejs %>
+
+	
+
+
+	<h3 style="text-align: center; padding-top: 1.5rem;">Welcome! Please view our Instructions page!</h3>
+	<div class="home_instructions">
+		<!-- LINK INSTRUCTIONS PAGE -->
+		<button onclick="location.href='http://vm-nutritionstudy.eecs.tufts.edu:8000/help';"  class="instructions">Instructions</button>
+	</div>
+
+	<div class="directory_container">
+		<!-- icons taken from https://icons8.com/ -->
+		<div class="directory_item">
+			<div class="directory_item_details">
+				<div class="jump-pts_link" onclick="location.href='http://vm-nutritionstudy.eecs.tufts.edu:8000/browse-aisles';">
+					<img class="directory_img" src="https://img.icons8.com/wired/64/000000/shopping-basket.png"/>
+					<p class="icon_text">Browse Aisles</p>	
+				</div>
+			</div>
+		</div>
+		<div class="directory_item">
+			<div class="directory_item_details">
+				<div class="jump-pts_link" onclick="location.href='http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Produce/all?default';">
+					<img class="directory_img" src="https://img.icons8.com/wired/64/000000/apple.png"/>
+					<p class="icon_text">Healthy Choices</p>
+				</div>
+			</div>
+		</div>
+		<div class="directory_item">
+			<div class="directory_item_details">
+				<div class="jump-pts_link" onclick="location.href='http://vm-nutritionstudy.eecs.tufts.edu:8000/cart';">
+					<img class="directory_img" src="https://img.icons8.com/dotty/80/000000/favorite-cart.png"/>
+					<p class="icon_text">Your Cart</p>
+				</div>
+			</div>
+		</div>
+		<div class="directory_item">
+			<div class="directory_item_details">
+				<div class="jump-pts_link" onclick="location.href='http://vm-nutritionstudy.eecs.tufts.edu:8000/help';">
+					<img class="directory_img" src="https://img.icons8.com/dotty/80/000000/help.png"/>
+					<p class="icon_text">Need Help?</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<!-- //footer -->
+<%- include partials/footer.ejs %>
+<!-- //footer -->	
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

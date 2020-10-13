@@ -1,0 +1,190 @@
+                                                  name  price  \
+0             Kellogg's Eggo Waffles Homestyle - 10 ct  2.89    
+1                Kellogg's Eggo Pancakes Minis - 40 ct  3.69    
+2             Kellogg's Eggo Waffles Blueberry - 10 ct  2.89    
+3       Kellogg's Eggo Waffles Chocolatey Chip - 10 ct  2.89    
+4            Kellogg's Eggo Waffles Buttermilk - 10 ct  2.89    
+5    Kellogg's Eggo French Toaster Sticks Cinnamon ...  3.69    
+6    Smart Ones Tasty American Favorites Cheesy Scr...  2.00    
+7    Kellogg's Eggo Waffles Thick & Fluffy Original...  3.49    
+8    Red's Natural Foods Burrito Turkey Sausage Egg...  2.50    
+9       Kellogg's Eggo Pancakes Chocolate Chip - 12 ct  3.69    
+10     Stop & Shop French Toast Sticks Double Cinnamon  3.29    
+11                   Jimmy Dean Breakfast Bowl Sausage  3.49    
+12          Kellogg's Eggo Pancakes Buttermilk - 12 ct  3.69    
+13   Smart Ones Delicious Mexican Flavors Breakfast...  2.00    
+14      Kellogg's Eggo Waffles Homestyle Minis - 10 ct  2.89    
+15   Red's Natural Foods Burrito Canadian Style Bac...  2.50    
+16              Stop & Shop Waffles Buttermilk - 10 ct  2.39    
+17   Kellogg's Eggo Waffles Miniature Cinnamon Toas...  2.89    
+18   Nature's Promise Waffles Homestyle Organic - 6 ct  2.99    
+19          Van's Waffles Blueberry Gluten Free - 6 ct  3.19    
+20   Kellogg's Eggo Waffles Nutri-Grain Whole Wheat...  3.49    
+21               Stop & Shop Waffles Homestyle - 10 ct  2.39    
+22   Smart Ones Tasty American Favorites Turkey Sau...  2.00    
+23   Hot Pockets Applewood Bacon, Egg & Cheese with...  2.69    
+24   Jimmy Dean Delights Muffin Sandwich Turkey Sau...  7.39    
+25              Stop & Shop Waffles Multigrain - 10 ct  2.39    
+26   Kellogg's Eggo Waffles Nutri-Grain Blueberry -...  3.49    
+27   Jimmy Dean Croissant Sandwiches Sausage, Egg &...  7.39    
+28   Jimmy Dean Biscuit Sandwiches Sausage, Egg & C...  7.39    
+29           Van's Waffles Original Gluten Free - 6 ct  3.19    
+..                                                 ...    ...   
+471  Vermont Bread Co. English Muffins 100% Whole W...  2.99    
+472             The Bake Shop Muffins Portuguese Sweet  4.19    
+473  Nature's Promise English Muffins Ready Split -...  2.89    
+474                       Thomas' Bread Swirl Cinnamon  3.99    
+475  Fiber One 100 Calorie English Muffins Original...  3.99    
+476                     The Bake Shop Bagels Blueberry  1.69    
+477       Thomas' Nooks & Crannies Bagels Plain - 4 ct  4.69    
+478        Vermont Bread Company Bread Cinnamon Raisin  3.49    
+479       The Bake Shop Muffins Blueberry Mini - 10 ct  4.19    
+480                         The Bake Shop Bagels Poppy  1.69    
+481  Dave's Killer Bread Bagels Plain Awesome Organ...  5.29    
+482                        The Bake Shop Bagels Marble  1.69    
+483        Fiber One English Muffins Multigrain - 6 ct  3.99    
+484  Pepperidge Farm Plain Mini Bagels Pre-Sliced -...  4.49    
+485                    Entenmann's Corn Muffins - 6 ct  4.49    
+486  Dave's Killer Bread Bagels Cinnamon Raisin Rem...  5.29    
+487  Entenmann's Blueberry Muffins Individually Wra...  4.49    
+488                   The Bake Shop Muffins Red Velvet  4.19    
+489                The Bake Shop Bagel Chunks Assorted  1.49    
+490      Dave's Killer Bread Raisin' The Roof! Organic  5.89    
+491  Bantam Bagels Mini Bagels Stuffed with Cream C...  5.19    
+492  Dave's Killer Bread English Muffins Killer Cla...  4.99    
+493  Carnation Breakfast Essentials Rich Milk Choco...  6.99    
+494  Carnation Breakfast Essentials Rich Milk Choco...  5.79    
+495  Carnation Breakfast Essentials Classic French ...  5.79    
+496  Carnation Breakfast Essentials Rich Milk Choco...  6.99    
+497  Carnation Breakfast Essentials Rich Chocolate ...  5.79    
+498  Carnation Breakfast Essentials Classic French ...  6.99    
+499  Carnation Breakfast Essentials Classic French ...  6.99    
+500  Carnation Breakfast Essentials High Protein Fr...  8.19    
+
+                                                 image         size  \
+0    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+1    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  14.1 oz box   
+2    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+3    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+4    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+5    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.7 oz box   
+6    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  6.49 oz box   
+7    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  11.6 oz box   
+8    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...     5 oz pkg   
+9    /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  14.8 oz box   
+10   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...    16 oz box   
+11   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...     7 oz pkg   
+12   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  16.4 oz box   
+13   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...     8 oz box   
+14   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  10.9 oz box   
+15   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...     5 oz pkg   
+16   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+17   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  10.75 oz bx   
+18   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...   7.4 oz box   
+19   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...   8.5 oz box   
+20   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+21   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+22   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  8.66 oz box   
+23   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...   8.5 oz box   
+24   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  20.4 oz box   
+25   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+26   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...  12.3 oz box   
+27   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...    18 oz box   
+28   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...    18 oz box   
+29   /images/Breakfast_Cereal/Breakfast_Cereal_Froz...     9 oz box   
+..                                                 ...          ...   
+471  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    12 oz pkg   
+472  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...     6 ct pkg   
+473  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    15 oz pkg   
+474  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    16 oz pkg   
+475  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    12 oz pkg   
+476  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...     4 ct pkg   
+477  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...  10.5 oz pkg   
+478  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    20 oz pkg   
+479  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...  10.5 oz pkg   
+480  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...     4 ct pkg   
+481  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...  16.7 oz pkg   
+482  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...     4 ct pkg   
+483  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    12 oz pkg   
+484  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    17 oz pkg   
+485  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...  10.5 oz box   
+486  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...  16.7 oz pkg   
+487  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...  10.5 oz box   
+488  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...     4 ct pkg   
+489  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    16 oz pkg   
+490  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...    18 oz pkg   
+491  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...   7.8 oz pkg   
+492  /images/Breakfast_Cereal/Breakfast_Cereal_Brea...  13.2 oz pkg   
+493  /images/Breakfast_Cereal/Breakfast_Cereal_Inst...     8 oz btl   
+494  /images/Breakfast_Cereal/Breakfast_Cereal_Inst...  12.6 oz box   
+495  /images/Breakfast_Cereal/Breakfast_Cereal_Inst...  12.6 oz box   
+496  /images/Breakfast_Cereal/Breakfast_Cereal_Inst...  17.7 oz can   
+497  /images/Breakfast_Cereal/Breakfast_Cereal_Inst...  5.64 oz box   
+498  /images/Breakfast_Cereal/Breakfast_Cereal_Inst...  17.7 oz can   
+499  /images/Breakfast_Cereal/Breakfast_Cereal_Inst...     8 oz btl   
+500  /images/Breakfast_Cereal/Breakfast_Cereal_Inst...     8 oz btl   
+
+        unit_price          category               subcategory  health_score  
+0     | $0.23 / oz  Breakfast_Cereal          Frozen_Breakfast             8  
+1     | $0.26 / oz  Breakfast_Cereal          Frozen_Breakfast             9  
+2     | $0.23 / oz  Breakfast_Cereal          Frozen_Breakfast             7  
+3     | $0.23 / oz  Breakfast_Cereal          Frozen_Breakfast             2  
+4     | $0.23 / oz  Breakfast_Cereal          Frozen_Breakfast            10  
+5     | $0.29 / oz  Breakfast_Cereal          Frozen_Breakfast            10  
+6     | $0.31 / oz  Breakfast_Cereal          Frozen_Breakfast             9  
+7     | $0.30 / oz  Breakfast_Cereal          Frozen_Breakfast             5  
+8     | $0.50 / oz  Breakfast_Cereal          Frozen_Breakfast             6  
+9     | $0.25 / oz  Breakfast_Cereal          Frozen_Breakfast             2  
+10    | $0.21 / oz  Breakfast_Cereal          Frozen_Breakfast             3  
+11    | $0.50 / oz  Breakfast_Cereal          Frozen_Breakfast             8  
+12    | $0.23 / oz  Breakfast_Cereal          Frozen_Breakfast             3  
+13    | $0.25 / oz  Breakfast_Cereal          Frozen_Breakfast            10  
+14    | $0.27 / oz  Breakfast_Cereal          Frozen_Breakfast             3  
+15    | $0.50 / oz  Breakfast_Cereal          Frozen_Breakfast             8  
+16    | $0.19 / oz  Breakfast_Cereal          Frozen_Breakfast             9  
+17    | $0.27 / oz  Breakfast_Cereal          Frozen_Breakfast             1  
+18    | $0.40 / oz  Breakfast_Cereal          Frozen_Breakfast             5  
+19    | $0.38 / oz  Breakfast_Cereal          Frozen_Breakfast             5  
+20    | $0.28 / oz  Breakfast_Cereal          Frozen_Breakfast             7  
+21    | $0.19 / oz  Breakfast_Cereal          Frozen_Breakfast             2  
+22    | $0.23 / oz  Breakfast_Cereal          Frozen_Breakfast            10  
+23    | $0.32 / oz  Breakfast_Cereal          Frozen_Breakfast             3  
+24    | $0.36 / oz  Breakfast_Cereal          Frozen_Breakfast             1  
+25    | $0.19 / oz  Breakfast_Cereal          Frozen_Breakfast             7  
+26    | $0.28 / oz  Breakfast_Cereal          Frozen_Breakfast             2  
+27    | $0.41 / oz  Breakfast_Cereal          Frozen_Breakfast             6  
+28    | $0.41 / oz  Breakfast_Cereal          Frozen_Breakfast             4  
+29    | $0.35 / oz  Breakfast_Cereal          Frozen_Breakfast             6  
+..             ...               ...                       ...           ...  
+471   | $0.25 / oz  Breakfast_Cereal          Breakfast_Breads             9  
+472   | $0.70 / ea  Breakfast_Cereal          Breakfast_Breads             4  
+473   | $0.19 / oz  Breakfast_Cereal          Breakfast_Breads             6  
+474   | $0.25 / oz  Breakfast_Cereal          Breakfast_Breads             3  
+475   | $0.33 / oz  Breakfast_Cereal          Breakfast_Breads             8  
+476   | $0.42 / ea  Breakfast_Cereal          Breakfast_Breads             5  
+477   | $0.45 / oz  Breakfast_Cereal          Breakfast_Breads             1  
+478   | $0.17 / oz  Breakfast_Cereal          Breakfast_Breads             5  
+479   | $0.40 / oz  Breakfast_Cereal          Breakfast_Breads            10  
+480   | $0.42 / ea  Breakfast_Cereal          Breakfast_Breads             3  
+481   | $0.32 / oz  Breakfast_Cereal          Breakfast_Breads             5  
+482   | $0.42 / ea  Breakfast_Cereal          Breakfast_Breads             3  
+483   | $0.33 / oz  Breakfast_Cereal          Breakfast_Breads            10  
+484   | $0.26 / oz  Breakfast_Cereal          Breakfast_Breads             4  
+485   | $0.43 / oz  Breakfast_Cereal          Breakfast_Breads             5  
+486   | $0.32 / oz  Breakfast_Cereal          Breakfast_Breads             6  
+487   | $0.43 / oz  Breakfast_Cereal          Breakfast_Breads             2  
+488   | $1.05 / ea  Breakfast_Cereal          Breakfast_Breads             1  
+489   | $0.09 / oz  Breakfast_Cereal          Breakfast_Breads            10  
+490   | $0.33 / oz  Breakfast_Cereal          Breakfast_Breads             8  
+491   | $0.67 / oz  Breakfast_Cereal          Breakfast_Breads             1  
+492   | $0.38 / oz  Breakfast_Cereal          Breakfast_Breads             7  
+493   | $0.15 / oz  Breakfast_Cereal  Instant_Breakfast_Drinks             9  
+494   | $0.46 / oz  Breakfast_Cereal  Instant_Breakfast_Drinks             9  
+495   | $0.46 / oz  Breakfast_Cereal  Instant_Breakfast_Drinks            10  
+496   | $0.39 / oz  Breakfast_Cereal  Instant_Breakfast_Drinks             5  
+497   | $1.03 / oz  Breakfast_Cereal  Instant_Breakfast_Drinks             5  
+498   | $0.39 / oz  Breakfast_Cereal  Instant_Breakfast_Drinks             2  
+499   | $0.15 / oz  Breakfast_Cereal  Instant_Breakfast_Drinks             2  
+500   | $0.17 / oz  Breakfast_Cereal  Instant_Breakfast_Drinks             4  
+
+[501 rows x 8 columns]

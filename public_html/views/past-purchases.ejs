@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <%- include partials/header.ejs %>
+</head>
+<body>
+	<!-- //topnav -->
+	<%- include partials/topnav.ejs %>
+
+	<h2 style="text-align: center; padding-top: 50px;">Thank you for shopping with us!</h2>
+
+<div class="container">
+<div class="shopping-cart">
+  <% var myCarts = new Array(items[items.length - 1].cart_id + 1); 
+     for(var i = 0; i < myCarts.length; i++) {
+         myCarts[i] = []; 
+     } %>
+
+  <% for(var i = 0; i < items.length; i++) {
+      var cartID = items[i].cart_id; 
+      myCarts[cartID].push(items[i]); 
+     } %>
+
+  <% for(var i = 0; i < myCarts.length; i++) {
+       if (myCarts[i].length != 0) { %>
+          <table class="past_table">
+            <tr class="table-header">
+              <th class="product-image">Image</th>
+              <th class="product-details">Product</th>
+              <th class="product-price">Price</th>
+              <th class="product-line-price">Quantity</th>
+            </tr>
+          <% for(var j = 0; j < myCarts[i].length; j++) {%>
+              <tr data-id = "<%= myCarts[i][j].product_id%>" class="product">
+                <td class = "product-image">
+                    <img src="<%=myCarts[i][j].image%>">
+                </td>
+                <td class="product-details">
+                    <div class="product-title"><%=myCarts[i][j].name%></div>
+                </td>
+                <td class="product-price">
+                  <%=myCarts[i][j].price%>
+                </td>
+                <td class="product-details">
+                  <%=myCarts[i][j].item_count%>
+                </td>
+              </tr>
+          <% } %>
+          </table>
+      <% } %>
+  <% } %>
+
+
+</div>
+</div>
+
+	<!-- //footer -->
+	<%- include partials/footer.ejs %>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+</body>

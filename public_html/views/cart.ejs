@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <%- include partials/header.ejs %>
+</head>
+<body>
+
+<%- include partials/topnav.ejs %>
+<div class="container">
+<div class="shopping-cart">
+  <table>
+    <tr class="table-header">
+      <th class="product-image">Image</th>
+      <th class="product-details">Product</th>
+      <th class="product-price">Price</th>
+      <th class="product-quantity">Quantity</th>
+      <th class="product-removal">Remove</th>
+      <th class="product-line-price">Total</th>
+    </tr>
+   <%var cart_total = 0%>
+   <% for(var i=0; i < items.length; i++) {%>
+      <tr data-id = "<%= items[i].product_id%>" class="product">
+        <td class = "product-image">
+            <img src="<%=items[i].image%>">
+        </td>
+        <td class="product-details">
+            <div class="product-title"><%=items[i].name%></div>
+        </td>
+        <td class="product-price">
+          <%=items[i].price%>
+        </td>
+        <td class="product-quantity">
+            <input type="number" value="<%=items[i].item_count%>" min="1">
+        </td>
+        <td class="product-removal">
+          <button class="remove-product"> Remove </button>
+        </td>
+        <td class="product-line-price">
+          <%var total = items[i].price * items[i].item_count%>
+          <%=total%>
+          <% cart_total = cart_total + total%>
+        </td>
+      </tr>
+    <%}%>
+  </table>
+ 
+<div class="totals">
+  <div class="totals-item">
+    <label>Subtotal</label>
+    <div class="totals-value" id="cart-subtotal"></div>
+  </div>
+  <div class="totals-item">
+    <label>Tax (5%)</label>
+    <div class="totals-value" id="cart-tax"></div>
+  </div>
+  <div class="totals-item totals-item-total">
+    <label>Grand Total</label>
+    <div class="totals-value" id="cart-total"></div>
+  </div>
+    <button class="checkout">Checkout</button>
+</div>
+
+</div>
+</div>
+
+<!-- //footer -->
+<%- include partials/footer.ejs %>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<script>
+ /* Set rates + misc */
+$( document ).ready(function() {
+    recalculateCart();
+});
+
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:8000"
+var taxRate = 0.05;
+var shippingRate = 9.00; 
+var fadeTime = 300;
+
+//Make a post request object
+function Request() {
+    var request;
+
+    this.makeRequest = function(endpoint, data, callback) {
+        request = new XMLHttpRequest();
+        request.open("POST", requestURL + "/" + endpoint, true);
+
+        request.onreadystatechange = 
+            function () {
+                if(request.readyState === 4 && request.status === 200) {
+                    console.log("done with good request");
+                    callback(request);}
+            }
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        request.send(data);
+    }
+}
+
+/* Assign actions */
+$('.product-quantity input').change( function() {
+    updateQuantity(this);
+});
+
+$('.product-removal button').click( function() {
+    removeItem(this);
+});
+
+
+$('.checkout').click( function() {
+    checkoutCart(this);
+});
+
+/* Recalculate cart */
+function recalculateCart() {
+    var subtotal = 0;
+    /* Sum up row totals */
+    $('.product').each(function () {
+        subtotal += parseFloat($(this).children('.product-line-price').text());
+    });
+
+    /* Calculate totals */
+    var tax   = subtotal * taxRate;
+    var total = subtotal + tax;
+
+    /* Update totals display */
+    $('.totals-value').fadeOut(fadeTime, function() {
+        $('#cart-subtotal').html(subtotal.toFixed(2));
+        $('#cart-tax').html(tax.toFixed(2));
+        $('#cart-total').html(total.toFixed(2));
+
+        if(total == 0){
+            $('.checkout').fadeOut(fadeTime);
+        }else{
+            $('.checkout').fadeIn(fadeTime);
+        }
+
+        $('.totals-value').fadeIn(fadeTime);
+    });
+}
+
+
+/* Update quantity */
+function updateQuantity(quantityInput) {
+    /* Calculate line price */
+    var productRow = $(quantityInput).parent().parent();
+    var price = parseFloat(productRow.children('.product-price').text());
+    var quantity = $(quantityInput).val();
+    var linePrice = price * quantity;
+
+    /* make post request to update food quanitity */
+    var request = new Request();
+    var data = "id=" + productRow.attr('data-id') + "&count=" + quantity;
+
+    request.makeRequest("cart/change-count", data, function(request) {
+
+        /* Update line price display and recalc cart totals */
+        productRow.children('.product-line-price').each(function () {
+            $(this).fadeOut(fadeTime, function() {
+                $(this).text(linePrice.toFixed(2));
+                recalculateCart();
+                $(this).fadeIn(fadeTime);
+            });
+        });
+        cart_count = request.responseText;
+
+        if(cart_count) {
+            if(cart_count == "0") {
+                $('.badge').text("");
+            } else {
+                $('.badge').text(cart_count);
+            }
+        }
+    });
+}
+
+/* Remove item from cart */
+function removeItem(removeButton) {
+    var request = new Request();
+    var product = $(removeButton).parent().parent();
+    var data    = "id=" + product.attr('data-id');
+
+    /* Post request to remove item from cart */
+    request.makeRequest("cart/remove", data, function(request){
+
+        /* Remove row from DOM and recalc cart total */
+        product.slideUp(fadeTime, function() {
+            product.remove();
+            recalculateCart();
+        });
+
+        cart_count = request.responseText;
+
+        if(cart_count) {
+            if(cart_count == "0") {
+                $('.badge').text("");
+            } else {
+                $('.badge').text(cart_count);
+            }
+        }
+    });
+} 
+
+/* Checkout items and create new empty cart for user */
+function checkoutCart(checkoutButton) {
+    var request = new Request();
+    console.log($(checkoutButton).parent().parent());
+    var data = $(checkoutButton).parent().parent(); // shopping cart div
+
+    request.makeRequest("cart/checkout-cart", data, function(request) {
+        cart_count = request.responseText;
+        $('.badge').text(cart_count);
+        recalculateCart();
+        location.replace("http://vm-nutritionstudy.eecs.tufts.edu:8000/past-purchases");
+    });
+}
+
+</script>
+</body>
+</html>

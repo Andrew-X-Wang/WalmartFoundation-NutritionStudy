@@ -1,0 +1,362 @@
+<style> 
+
+.panel-sidenav a {
+
+    color: #577926;
+    font-size: 20px; 
+    font-weight: 500px;
+
+}
+
+.panel-sidenav a {
+
+    color: #577926;
+    font-size: 20px; 
+    font-weight: 500px;
+
+}
+
+
+</style>
+<div class="aisle-sidenav" style="display: table-cell; width: 20%; vertical-align: top;">
+    <div class="categories">
+        <h2 class="sidenav-header">AISLES</h2>
+        <div class = "sidenav">
+
+            <button class="parent-sidenav">Produce</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Produce/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Produce</a></li>
+                        <li> <a href="<%=anchor_link%>Fresh_Vegetables?filter=<%=filter%>">
+                         Fresh Vegetables</a></li>                        
+                        <li> <a href="<%=anchor_link%>Fresh_Fruit?filter=<%=filter%>">
+                         Fresh Fruit</a></li> 
+                        <li> <a href="<%=anchor_link%>Fresh_Juice_Juice_Blends?filter=
+                        <%=filter%>">Fresh Juice & Juice Blends</a></li> 
+                        <li> <a href="<%=anchor_link%>Fresh_Cut_Fruit_Vegetables?filter=
+                        <%=filter%>"> Fresh Cut Fruit & Vegetables</a></li> 
+                        <li> <a href="<%=anchor_link%>Organic?filter=<%=filter%>">
+                        Organic</a></li>
+                        <li> <a href="<%=anchor_link%>Desserts_Pastries?filter=<%=filter%>">Desserts Pastries</a></li>
+                        <li> <a href="<%=anchor_link%>Fresh_Pizza_Crusts?filter=<%=filter%>">Fresh Pizza Crusts</a></li>
+                        <li> <a href="<%=anchor_link%>Rolls_Buns?filter=<%=filter%>">Rolls Buns</a></li>
+                    </ul> 
+                </div>
+
+            <button class="parent-sidenav">Meats</button>
+                <div class="panel-sidenav">
+                <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Meat/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Meat</a></li>
+                        <li> <a href="<%=anchor_link%>Lamb?<%=filter%>">
+                         Lamb</a></li>
+                        <li> <a href="<%=anchor_link%>Organic?<%=filter%>">
+                         Organic</a></li>
+                        <li> <a href="<%=anchor_link%>Pork_Ham?<%=filter%>">
+                         Pork & Ham</a></li>
+                        <li> <a href="<%=anchor_link%>Turkey?<%=filter%>">
+                         Turkey</a></li>
+                        <li> <a href="<%=anchor_link%>Hot_Dogs_Sausages?<%=filter%>">
+                         Hot Dogs & Sausages</a></li>
+                        <li> <a href="<%=anchor_link%>Meat-Free_Options_Alternatives?
+                        <%=filter%>">Meat Free Alternatives</a></li>
+                        <li> <a href="<%=anchor_link%>Bacon_Breakfast_Meats?<%=filter%>">Bacon & Breakfast Meats</a></li>
+                        <li> <a href="<%=anchor_link%>Chicken?<%=filter%>">
+                         Chicken</a></li>
+                        <li> <a href="<%=anchor_link%>Beef?<%=filter%>">
+                         Beef</a></li>
+                    </ul> 
+                </div>
+
+            <button class="parent-sidenav">Bread & Bakery</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Bread_Bakery/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Bread & Bakery</a></li>
+                        <li> <a href="<%=anchor_link%>Organic?filter=<%=filter%>">
+                         Organic</a></li>                        
+                        <li> <a href="<%=anchor_link%>Bagels?filter=<%=filter%>">
+                         Bagels</a></li> 
+                        <li> <a href="<%=anchor_link%>Packaged_Bread?filter=<%=filter%>">Packaged Bread</a></li> 
+                        <li> <a href="<%=anchor_link%>Muffins?filter=<%=filter%>">
+                         Muffins</a></li> 
+                        <li> <a href="<%=anchor_link%>English_Muffins?filter=<%=filter%>">English Muffins</a></li>
+                        <li> <a href="<%=anchor_link%>Desserts_Pastries?filter=<%=filter%>">Desserts Pastries</a></li>
+                        <li> <a href="<%=anchor_link%>Fresh_Pizza_Crusts?filter=<%=filter%>">Fresh Pizza Crusts</a></li>
+                        <li> <a href="<%=anchor_link%>Rolls_Buns?filter=<%=filter%>">Rolls & Buns</a></li>
+                    </ul> 
+                </div>
+
+            <button class="parent-sidenav">Dairy</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Dairy/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Dairy</a></li>
+                        <li> <a href="<%=anchor_link%>Butter_Margarine?<%=filter%>">
+                         Butter & Margarine</a></li>  
+                        <li> <a href="<%=anchor_link%>Packaged_Cheese?<%=filter%>">
+                        Packaged Cheese</a></li>
+                        <li> <a href="<%=anchor_link%>Cream_Creamers?<%=filter%>">
+                        Cream & Creamers</a></li>
+                        <li> <a href="<%=anchor_link%>Milk?<%=filter%>">
+                        Milk</a></li>
+                        <li> <a href="<%=anchor_link%>Eggs_Egg_Substitutes?<%=filter%>">
+                        Eggs & Egg Substitutes</a></li>  
+                        <li> <a href="<%=anchor_link%>Yogurt?<%=filter%>">
+                        Yogurt</a></li>  
+                        <li> <a href="<%=anchor_link%>Refrigerated_Beverages?<%=filter%>">
+                        Refrigerated Beverages</a></li>
+                        <li> <a href="<%=anchor_link%>Plant-Based_Milk?<%=filter%>">
+                         Plant-Based Milk</a></li>
+                        <li> <a href="<%=anchor_link%>Sour_Cream?<%=filter%>">
+                         Sour Cream</a></li>
+                        <li> <a href="<%=anchor_link%>Cream_Cheese?<%=filter%>">
+                        Cream Cheese</a></li> 
+                        <li> <a href="<%=anchor_link%>Organic?<%=filter%>">
+                        Organic</a></li>    
+                      <li> <a href="<%=anchor_link%>Cottage_Cheese?<%=filter%>">
+                        Cottage Cheese</a></li>  
+                    </ul> 
+                </div>
+            <button class="parent-sidenav">Deli</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Deli/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                        All Deli</a></li>
+                        <li> <a href="<%=anchor_link%>
+                        Prepared_Meals_Sides_More?filter=<%=filter%>">
+                        Prepared Meals, Sides, & More</a></li>                        
+                        <li> <a href="<%=anchor_link%>Lunch_Solutions?filter=<%=filter%>">
+                        Lunch Solutions</a></li> 
+                        <li> <a href="<%=anchor_link%>Fresh_Sliced_Meat?filter=<%=filter%>">Fresh Sliced Meat</a></li> 
+                        <li> <a href="<%=anchor_link%>Party_Trays?filter=<%=filter%>">
+                        Party Trays</a></li> 
+                        <li> <a href="<%=anchor_link%>Specialty_Cheese?filter=<%=filter%>">Specialty Cheese</a></li> 
+                        <li> <a href="<%=anchor_link%>Fresh_Sliced_Cheese?filter=<%=filter%>">Fresh Sliced Cheese</a></li> 
+                        <li> <a href="<%=anchor_link%>Packaged_?filter=<%=filter%>">
+                        Packaged</a></li> 
+                    </ul> 
+                </div>
+            <button class="parent-sidenav">Seafood</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Seafood/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                        All Seafood</a></li>
+                        <li> <a href="<%=anchor_link%>Shrimp_Shellfish?filter=<%=filter%>">
+                        Shrimp Shellfish</a></li>                        
+                        <li> <a href="<%=anchor_link%>Fish?filter=<%=filter%>">
+                        Fish</a></li> 
+                        <li> <a href="<%=anchor_link%>Prepared_Ready_To_Heat_Seafood?filter=<%=filter%>">Prepared & Ready To Heat Seafood</a></li> 
+                    </ul> 
+                </div>
+            <button class="parent-sidenav">Soups & Canned Goods</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Soups_Canned_Goods/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Soups & Canned Goods</a></li>
+                        <li> <a href="<%=anchor_link%>Soup?<%=filter%>">
+                         Soup</a></li>  
+                        <li> <a href="<%=anchor_link%>Canned_Tuna_Seafood?<%=filter%>">
+                         Canned Tuna & Seafood</a></li>
+                        <li> <a href="<%=anchor_link%>Canned_Dried_Tomatoes?<%=filter%>">
+                        Canned Dried Tomatoes</a></li>
+                        <li> <a href="<%=anchor_link%>Nut_Butters_Spreads?<%=filter%>">
+                         Nut Butters & Spreads</a></li>
+                        <li> <a href="<%=anchor_link%>Canned_Meat_Poultry?<%=filter%>">
+                         Canned Meat & Poultry</a></li>
+                        <li> <a href="<%=anchor_link%>Canned_Beans?<%=filter%>">
+                         Canned Beans</a></li>
+                        <li> <a href="<%=anchor_link%>Organic?<%=filter%>">
+                         Organic</a></li>
+                        <li> <a href="<%=anchor_link%>Canned_Vegetables?<%=filter%>">
+                         Canned Vegetables</a></li> 
+                        <li> <a href="<%=anchor_link%>Canned_Fruit?<%=filter%>">
+                         Canned Fruit</a></li>        
+                    </ul> 
+                </div>
+            <button class="parent-sidenav">Snacks_Candy</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Snacks_Candy/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         Snacks Candy</a></li>
+                        <li> <a href="<%=anchor_link%>Cookies?<%=filter%>">
+                         Cookies</a></li>  
+                        <li> <a href="<%=anchor_link%>Dried_Fruits_Raisins_Fruit_Snacks?<%=filter%>">
+                         Dried Fruits & Raisins Fruit Snacks</a></li>
+                        <li> <a href="<%=anchor_link%>Candy_Gum_Mints?<%=filter%>">
+                        Candy, Gum, & Mints</a></li>
+                        <li> <a href="<%=anchor_link%>Pretzels_Popcorn?<%=filter%>">
+                         Pretzels Popcorn</a></li>
+                        <li> <a href="<%=anchor_link%>Nuts_Seeds_Granola_Trail_Mixes?<%=filter%>">
+                         Nuts, Seeds, Granola, Trail Mixes</a></li>
+                        <li> <a href="<%=anchor_link%>Dips_Hummus_Spreads?<%=filter%>">
+                         Dips, Hummus, & Spreads</a></li>
+                        <li> <a href="<%=anchor_link%>Crackers?<%=filter%>">
+                         Crackers</a></li>
+                        <li> <a href="<%=anchor_link%>Granola_Nutrition_Bars?<%=filter%>">
+                        Granola Nutrition Bars</a></li> 
+                        <li> <a href="<%=anchor_link%>Cooking_Wine_Vinegar?<%=filter%>">
+                        Chips</a></li>    
+                      <li> <a href="<%=anchor_link%>Organic?<%=filter%>">
+                        Organic</a></li>  
+                      <li> <a href="<%=anchor_link%>Extracts_Flavorings?<%=filter%>">
+                        Extracts & Flavorings</a></li>      
+                    </ul> 
+                </div>
+            <button class="parent-sidenav">Baking_Cooking_Needs</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Baking_Cooking_Needs/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Baking & Cooking Needs</a></li>
+                        <li> <a href="<%=anchor_link%>Pie_Crusts_Pastry_Dough?<%=filter%>">
+                         Pie Crusts & Pastry Dough</a></li>  
+                        <li> <a href="<%=anchor_link%>Frosting_Cake_Decorations?<%=filter%>">
+                         Frosting & Cake Decorations</a></li>
+                        <li> <a href="<%=anchor_link%>Sugar_Sweetners?<%=filter%>">
+                        Sugar * Sweetners</a></li>
+                        <li> <a href="<%=anchor_link%>Flour_Meal?<%=filter%>">
+                         Flour & Meal</a></li>
+                        <li> <a href="<%=anchor_link%>Shreded_Coconut?<%=filter%>">
+                          Shreded Coconut</a></li>
+                        <li> <a href="<%=anchor_link%>Cooking_Oils_Sprays?<%=filter%>">
+                         Cooking Oils & Sprays</a></li>
+                        <li> <a href="<%=anchor_link%>Baking_mixes?<%=filter%>">
+                         Baking mixes</a></li>
+                        <li> <a href="<%=anchor_link%>Pie_Pastry_Filling?<%=filter%>">
+                        Pie & Pastry Filling</a></li> 
+                        <li> <a href="<%=anchor_link%>Cooking_Wine_Vinegar?<%=filter%>">
+                        Cooking Wine Vinegar</a></li>    
+                      <li> <a href="<%=anchor_link%>Organic?<%=filter%>">
+                        Organic</a></li>  
+                      <li> <a href="<%=anchor_link%>Extracts_Flavorings?<%=filter%>">
+                        Extracts & Flavorings</a></li>      
+                    </ul> 
+                </div>
+            <button class="parent-sidenav">Frozen</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Frozen/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Frozen</a></li>
+                        <li> <a href="<%=anchor_link%>Appetizers_Snacks?<%=filter%>">
+                         Appetizers & Snacks</a></li>  
+                        <li> <a href="<%=anchor_link%>Meals_Entrees_Sides?<%=filter%>">
+                         Meals & Entrees Sides</a></li>
+                        <li> <a href="<%=anchor_link%>Potatoes_Onion_Rings?<%=filter%>">
+                        Potatoes & Onion Rings</a></li>
+                        <li> <a href="<%=anchor_link%>Breakfast?<%=filter%>">
+                         Breakfast</a></li>
+                        <li> <a href="<%=anchor_link%>Desserts_opping?<%=filter%>">
+                         Desserts topping</a></li>
+                        <li> <a href="<%=anchor_link%>Pizza?<%=filter%>">
+                         Pizza</a></li>
+                        <li> <a href="<%=anchor_link%>Fruit?<%=filter%>">
+                         Fruit</a></li>
+                        <li> <a href="<%=anchor_link%>Vegetables?<%=filter%>">
+                        Vegetables</a></li> 
+                        <li> <a href="<%=anchor_link%>Pasta?<%=filter%>">
+                        Pasta</a></li>    
+                      <li> <a href="<%=anchor_link%>Ice_Cream_Novelties?<%=filter%>">
+                        Ice Cream Novelties</a></li>  
+                      <li> <a href="<%=anchor_link%>Organic?<%=filter%>">
+                       Organic</a></li>      
+                    </ul> 
+                </div>
+
+            <button class="parent-sidenav">Beverages</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Beverages/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Beverages</a></li>
+                        <li> <a href="<%=anchor_link%>Coffee?<%=filter%>">
+                         Coffee</a></li>
+                        <li> <a href="<%=anchor_link%>K-Cups?<%=filter%>">
+                         K-Cups</a></li>
+                        <li> <a href="<%=anchor_link%>Organic?<%=filter%>">
+                         Organic</a></li>
+                        <li> <a href="<%=anchor_link%>Iced_Tea_Hot_Tea_Tea_Beverages?<%=filter%>">Iced Tea, Hot Tea, & Tea Beverages</a></li>
+                        <li> <a href="<%=anchor_link%>Juice?<%=filter%>">
+                          Juice</a></li>
+                        <li> <a href="<%=anchor_link%>Lifestyle_Sports_Nutrition_Beverages?<%=filter%>">
+                          Lifestyle/Sports Nutrition Beverages</a></li>
+                        <li> <a href="<%=anchor_link%>Powdered_Drink_Mixes?<%=filter%>">
+                          Powdered Drink Mixes</a></li>
+                        <li> <a href="<%=anchor_link%>Soda?<%=filter%>">
+                         Soda</a></li>
+                        <li> <a href="<%=anchor_link%>Sparkling_Water_Seltzer?<%=filter%>">
+                         Sparkling Water & Seltzer</a></li>
+                        <li> <a href="<%=anchor_link%>Kombucha?<%=filter%>">
+                         Kombucha</a></li>
+                        <li> <a href="<%=anchor_link%>Water?<%=filter%>">
+                         Water</a></li>                        
+                    </ul> 
+                </div>
+
+            <button class="parent-sidenav">Rice Grains & Pasta Beans</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Rice_Grains_Pasta_Beans/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Rice Grains & Pasta Beans</a></li>
+                        <li> <a href="<%=anchor_link%>Potato_Mixes?<%=filter%>">
+                         Potato Mixes</a></li>
+                        <li> <a href="<%=anchor_link%>Packaged_Meals_Sides?<%=filter%>">
+                         Packaged Meals & Sides</a></li>
+                        <li> <a href="<%=anchor_link%>Rice_Grains?<%=filter%>">
+                         Rice Grains</a></li>
+                        <li> <a href="<%=anchor_link%>Noodles?<%=filter%>">
+                          Noodles</a></li>
+                        <li> <a href="<%=anchor_link%>Pasta?<%=filter%>">
+                          Pasta</a></li>
+                        <li> <a href="<%=anchor_link%>Pitas_Tortillas_Taco_Shells_Wraps?<%=filter%>">
+                          Pitas, Tortillas, Taco Shells, & Wraps</a></li>
+                        <li> <a href="<%=anchor_link%>Stuffing_Mix?<%=filter%>">
+                          Stuffing Mix</a></li>                           
+                    </ul> 
+                </div>
+
+            <button class="parent-sidenav">Condiments & Sauces</button>
+                <div class="panel-sidenav">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Condiments_Sauces/"%>
+                    <ul>
+                        <li> <a href="<%=anchor_link%>all?<%=filter%>">
+                         All Condiments & Sauces</a></li>
+                        <li> <a href="<%=anchor_link%>Organic?<%=filter%>">
+                         Organic</a></li>
+                        <li> <a href="<%=anchor_link%>Salad_Dressing_Toppings?<%=filter%>">
+                         Salad Dressing Toppings</a></li>
+                        <li> <a href="<%=anchor_link%>Nut_Butters_Spreads?<%=filter%>">
+                         Nut Butters Spreads</a></li>
+                        <li> <a href="<%=anchor_link%>Sauces_Marinades_Gravy?<%=filter%>">
+                          Sauces Marinades Gravy</a></li>
+                        <li> <a href="<%=anchor_link%>Olives_Capers?<%=filter%>">
+                          Olives Capers</a></li>
+                        <li> <a href="<%=anchor_link%>Pasta_Pizza_Sauce?<%=filter%>">
+                          Pasta Pizza Sauce</a></li>
+                        <li> <a href="<%=anchor_link%>Pickles_Peppers_Relish?<%=filter%>">
+                          Pickles Peppers Relish</a></li> 
+                        <li> <a href="<%=anchor_link%>Jams_Jelly_Fruit_Spreads?<%=filter%>">
+                          Jams Jelly Fruit_Spreads</a></li>        
+                        <li> <a href="<%=anchor_link%>Ketchup_Mayo_Mustard?<%=filter%>">
+                         Ketchup Mayo Mustard</a></li>      
+                        <li> <a href="<%=anchor_link%>Syrup?<%=filter%>">
+                         Syrup</a></li>                           
+                    </ul> 
+                </div>
+
+        </div>           
+    </div>
+</div>
+
+
