@@ -1,3 +1,4 @@
+<!doctype HTML>
 <style> 
 
 .panel-sidenav a {
@@ -22,10 +23,10 @@
     <div class="categories">
         <h2 class="sidenav-header">AISLES</h2>
         <div class = "sidenav">
-
+            <% var PORT = "8003" %>
             <button class="parent-sidenav">Produce</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Produce/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Produce/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Produce</a></li>
@@ -47,7 +48,7 @@
 
             <button class="parent-sidenav">Meats</button>
                 <div class="panel-sidenav">
-                <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Meat/"%>
+                <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Meat/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Meat</a></li>
@@ -73,7 +74,7 @@
 
             <button class="parent-sidenav">Bread & Bakery</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Bread_Bakery/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Bread_Bakery/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Bread & Bakery</a></li>
@@ -93,7 +94,7 @@
 
             <button class="parent-sidenav">Dairy</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Dairy/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Dairy/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Dairy</a></li>
@@ -125,7 +126,7 @@
                 </div>
             <button class="parent-sidenav">Deli</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Deli/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Deli/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                         All Deli</a></li>
@@ -145,7 +146,7 @@
                 </div>
             <button class="parent-sidenav">Seafood</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Seafood/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Seafood/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                         All Seafood</a></li>
@@ -158,7 +159,7 @@
                 </div>
             <button class="parent-sidenav">Soups & Canned Goods</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Soups_Canned_Goods/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Soups_Canned_Goods/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Soups & Canned Goods</a></li>
@@ -184,7 +185,7 @@
                 </div>
             <button class="parent-sidenav">Snacks_Candy</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Snacks_Candy/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Snacks_Candy/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          Snacks Candy</a></li>
@@ -214,7 +215,7 @@
                 </div>
             <button class="parent-sidenav">Baking_Cooking_Needs</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Baking_Cooking_Needs/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Baking_Cooking_Needs/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Baking & Cooking Needs</a></li>
@@ -244,7 +245,7 @@
                 </div>
             <button class="parent-sidenav">Frozen</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Frozen/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Frozen/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Frozen</a></li>
@@ -275,7 +276,7 @@
 
             <button class="parent-sidenav">Beverages</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Beverages/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Beverages/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Beverages</a></li>
@@ -305,7 +306,7 @@
 
             <button class="parent-sidenav">Rice Grains & Pasta Beans</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Rice_Grains_Pasta_Beans/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Rice_Grains_Pasta_Beans/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Rice Grains & Pasta Beans</a></li>
@@ -328,7 +329,7 @@
 
             <button class="parent-sidenav">Condiments & Sauces</button>
                 <div class="panel-sidenav">
-                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8000/products/Condiments_Sauces/"%>
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/products/Condiments_Sauces/"%>
                     <ul>
                         <li> <a href="<%=anchor_link%>all?<%=filter%>">
                          All Condiments & Sauces</a></li>

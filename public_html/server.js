@@ -17,10 +17,11 @@ var mysql      = require('mysql');
 const ejsLint  = require('ejs-lint');
 var session    = require('express-session');
 var bodyParser = require('body-parser');
+var PORT = 8003
 
 
 /* set view enjine for ejs files */
-app.set('port', (process.env.PORT || 8000));
+app.set('port', (process.env.PORT || PORT));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
@@ -61,7 +62,7 @@ function auth (req, res, next) {
 // For debugging ejs pages
 ejsLint.lint()
 
-// Listen on port 8000
-app.listen(8000, function () {
-  console.log('Listening on Port 8000');
+// Listen on port PORT(8003)
+app.listen(PORT, function () {
+  console.log('Listening on Port ' + PORT);
 });

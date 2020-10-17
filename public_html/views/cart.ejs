@@ -74,7 +74,7 @@ $( document ).ready(function() {
     recalculateCart();
 });
 
-var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:8000"
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu" + PORT
 var taxRate = 0.05;
 var shippingRate = 9.00; 
 var fadeTime = 300;
@@ -212,7 +212,7 @@ function checkoutCart(checkoutButton) {
         cart_count = request.responseText;
         $('.badge').text(cart_count);
         recalculateCart();
-        location.replace("http://vm-nutritionstudy.eecs.tufts.edu:8000/past-purchases");
+        location.replace("http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/past-purchases");
     });
 }
 
