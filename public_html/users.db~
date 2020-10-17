@@ -1,3 +1,4 @@
+<!doctype SQL>
 -- in user table differentiate between friedman study and turk users?
 CREATE TABLE IF NOT EXISTS users (
   user_id    int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -76,3 +77,10 @@ CREATE TABLE IF NOT EXISTS cart_items
     item_count   int not null,
     PRIMARY KEY  (cart_id, product_id)
 );
+
+insert into users (username, password, version, session)
+            values (leader1, 1, 1, 1);
+insert into users (username, password, version, session)
+            values (leader1, 1, 1, 1);
+insert into users (username, password, version, session)
+            values (leader1, 1, 1, 1);

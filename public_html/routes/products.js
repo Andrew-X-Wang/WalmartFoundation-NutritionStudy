@@ -79,6 +79,13 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
         var products    = await con.query(get_products, query_params["product_query"]);
         var list        = await con.query(get_listItems, [cart_id]);
 
+        var get_leaderboard = "SELECT users.username, carts.health_total " + 
+                              "FROM users INNER JOIN carts " + 
+                              "ON users.cart_id=carts.cart_id order by health_total desc;"
+        var leaderboard = await con.query(get_leaderboard, []);
+        console.log(leaderboard)
+        console.log("did it show anything?")
+
         var header = category + " - " + subcategory;
         header     = header.replace(/_/g, " ");
     
