@@ -4,6 +4,22 @@ var con        = require('./database.js'); //in routes file already
 var async      = require('async');
 const perPage  = 12;
 
+var LEADER_SIZE = 10
+
+/* How to put this in a separate file :( need to be used in both cart.js and here*/
+async function get_leaderboard () {
+    var get_leaderboard = "SELECT users.username, carts.health_total " + 
+                          "FROM users INNER JOIN carts " + 
+                          "ON users.cart_id=carts.cart_id order by health_total desc " + 
+                          "LIMIT ?;"
+    try {
+        var leaderboard = await con.query(get_leaderboard, [LEADER_SIZE]);
+    } catch (err) {
+        console.log(err);
+        res.send("ERROR");
+    }
+    return leaderboard;
+}
 
 /* auth to check if logged in */
 function auth (req, res, next) {
@@ -77,12 +93,9 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
         var page_result = await con.query(count_results, query_params["page_query"]);
         var total_pages = Math.ceil(page_result[0].numberOfProducts / perPage);
         var products    = await con.query(get_products, query_params["product_query"]);
-        var list        = await con.query(get_listItems, [cart_id]);
+        var list        = await con.query(get_listItems, [cart_id]);    
+        var leaderboard = await get_leaderboard();
 
-        var get_leaderboard = "SELECT users.username, carts.health_total " + 
-                              "FROM users INNER JOIN carts " + 
-                              "ON users.cart_id=carts.cart_id order by health_total desc;"
-        var leaderboard = await con.query(get_leaderboard, []);
         console.log(leaderboard)
         console.log("did it show anything?")
 
@@ -96,7 +109,8 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
                 filter       : filter,
                 cart_count   : req.session.cart_count,
                 current_page : page,
-                pages        : (page <= total_pages ? total_pages : 0)
+                pages        : (page <= total_pages ? total_pages : 0),
+                leaderboard  : leaderboard
             }      
         res.render('sample-aisle', render_params);
 

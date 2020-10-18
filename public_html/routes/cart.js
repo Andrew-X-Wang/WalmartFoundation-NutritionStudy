@@ -2,6 +2,23 @@ var express  = require('express');
 var router   = express.Router();
 var con      = require('./database.js'); //in routes file already
 
+var LEADER_SIZE = 10
+
+/* How to put this in a separate file :( need to be used in both producs.js and here*/
+async function get_leaderboard () {
+    var get_leaderboard = "SELECT users.username, carts.health_total " + 
+                          "FROM users INNER JOIN carts " + 
+                          "ON users.cart_id=carts.cart_id order by health_total desc " + 
+                          "LIMIT ?;"
+    try {
+        var leaderboard = await con.query(get_leaderboard, [LEADER_SIZE]);
+    } catch (err) {
+        console.log(err);
+        res.send("ERROR");
+    }
+    return leaderboard;
+}
+
 
 /* Cart */
 function auth (req, res, next) {
@@ -22,11 +39,15 @@ router.get('/', auth, async function(req, res) {
                     "WHERE cart_id = ?";
   try {
     var cart = await con.query(get_details, [req.session.cart_id]);
+    var leaderboard = await get_leaderboard();
+    console.log(leaderboard);
 
     res.render('cart.ejs', 
     { header     : "Your Cart", 
       items      : cart,
-      cart_count : req.session.cart_count });
+      cart_count : req.session.cart_count,
+      leaderboard : leaderboard
+    });
 
   } catch(err) { console.log(err); res.send("error"); }
 });
