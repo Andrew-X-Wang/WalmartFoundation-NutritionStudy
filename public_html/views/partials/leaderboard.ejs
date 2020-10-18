@@ -1,0 +1,43 @@
+<!doctype HTML>
+
+<div class="aisle-leaderboard" style="display: table-cell; width: 20%; vertical-align: top;">
+    <div class="categories">
+        <h2 class="leaderboard-header">Leaderboard</h2>
+        <div class = "leaderboard"> HELLO WORLD
+        	<button class="parent-leaderboard">WHAT</button>
+                <div class="panel-leaderboard">
+                    <% var anchor_link = "http://vm-nutritionstudy.eecs.tufts.edu:8002/products/Produce/"%>
+                    <ul>
+                      <% for (var i = 0; i < leaderboard.length; i++) {%>
+                        <li> <%=leaderboard[i].username%> <%=leaderboard[i].health_total%> </li>
+                      <%} %>
+                    </ul> 
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script>
+function get_leaderboard() {
+
+  var request = new PostRequest();
+
+  var data = "id="     + item.attr('data-id')   + 
+             "&name="  + item.attr('data-name') +
+             "&img="   + item.attr('data-img')  +
+             "&price=" + item.attr('data-price');
+
+  request.makeRequest("cart/add", data, function(request){
+
+      cart_count = request.responseText;
+
+      if (cart_count) {
+        if (cart_count == 0) {
+          $('.badge').text("");
+        } else {
+          $('.badge').text(cart_count);
+        }
+      }
+  });
+}
+</script> -->
