@@ -62,6 +62,6 @@ function auth (req, res, next) {
 ejsLint.lint()
 
 // Listen on port 8000
-app.listen(8000, function () {
-  console.log('Listening on Port 8000');
+app.listen(8001, function () {
+  console.log('Listening on Port 8001');
 });
