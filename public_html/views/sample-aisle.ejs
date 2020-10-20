@@ -11,8 +11,166 @@
     <p><%=listItems[i].listDescription%></p>
 <%} %> -->
 
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingModal">
+  Shopping List
+</button> -->
+
+<!-- Item Detail Modal Window -->
+<div class="modal fade" id="exampleModal" tabindex="-1" data-focus-on="input:first" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal_title" id="modalLabel">Item Detail</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div>
+            <div class="product-basic-details">
+              <div class="product-half-column">
+                <img id="imgInput" style="display: block; margin-right: auto; margin-left: auto; height: 12rem;">
+                <div class="product-thumbnail-wrapper">
+                  <div class="product-detail-thumbnail-carousel">
+                    <div class="product-thumbnail-image">
+                      <img class="carousel-image" id="c1">
+                    </div>
+                    <div class="product-thumbnail-image">
+                      <img class="carousel-image" id="c2">
+                    </div>
+                    <div class="product-thumbnail-image">
+                      <img class="carousel-image" id="c3">
+                    </div>
+                    <div class="product-thumbnail-image">
+                      <img class="carousel-image" id="c4">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-half-column">
+                <div class="product-title-price">
+                  <div>
+                    <div class="nameInput" style="font-weight: 450; width: 100%; font-size: 1.8rem; line-height: 2.7rem;"></div>
+                    <div class="product-detail-rating">Insert Rating</div>
+                  </div>
+                  <div class="product-price-cart">
+                    <div class="product-price-info">
+                      <div class="priceInput"></div>
+                      <div class="unitPriceInput"></div>
+                    </div>
+                    <div class="modal_add-button"
+                          data-id    = "" 
+                          data-name  = ""
+                          data-price = ""
+                          data-img   = "">
+                      <!-- add product data here -->
+                      <button class = "button add_cart"> Add to Cart </button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingModal" >
+                        Shopping List
+                      </button> <!-- test -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="information-header">
+              <h3 class="info-header-title">Information</h3>
+            </div>
+            <div class="product-basic-details">
+              <div class="product-half-column">
+                <div>
+                  <h3 class="product-detail-heading">Nutrition</h3>
+                  <div class="nutrition-quick-facts">
+                    <div class="nutrition-quick-facts_single">
+                      <div class="calInput"></div>
+                      <span style="text-transform: uppercase;">Calories</span>
+                    </div>
+                    <div class="nutrition-quick-facts_single">
+                      <div class="satfatInput"></div>
+                      <span style="text-transform: uppercase;">Sat Fat</span>
+                    </div>
+                    <div class="nutrition-quick-facts_single">
+                      <div class="sodInput"></div>
+                      <span style="text-transform: uppercase;">Sodium</span>
+                    </div>
+                    <div class="nutrition-quick-facts_single">
+                      <div class="sugInput"></div>
+                      <span style="text-transform: uppercase;">Sugars</span>
+                    </div>                        
+                  </div>
+                </div>
+                <div class="product-nutrition-facts-details">
+                  <h5 class="product-detail-heading">Nutrition Facts</h5>
+                    <div class="serving-info">
+                      <dt class="horizontal-row">Serving Size</dt>
+                      <dd class="horizontal-row value">info</dd>
+                      <dt class="horizontal-row">Servings Per Container</dt>
+                      <dd class="horizontal-row value">info</dd>
+                    </div>
+                  <h5 class="section-title">Amount Per Serving</h5>
+                    <div class="serving-info">
+                      <dt class="horizontal-row">Calories</dt>
+                      <dd class="horizontal-row value">info</dd>
+                      <dt class="horizontal-row">Calories from Fat</dt>
+                      <dd class="horizontal-row value">info</dd>
+                    </div>
+                  <h5 class="section-title title-daily">% Daily Value*</h5>
+                    <div class="serving-info">
+                      <div class="nutrition-subsection">
+                        <dt class="horizontal-row">Total Fat</dt>
+                        <dd class="horizontal-row value">info</dd>
+                        <dt class="horizontal-row row-indent">Saturated Fat</dd>
+                        <dd class="horizontal-row value">info</dd>
+                        <dt class="horizontal-row row-indent">Trans Fat</dt>
+                        <dd class="horizontal-row value">info</dd>
+                      </div>
+                      <div class="nutrition-subsection">
+                        <dt class="horizontal-row">Cholesterol</dt>
+                        <dd class="horizontal-row value">info</dd>
+                      </div>
+                      <div class="nutrition-subsection">
+                        <dt class="horizontal-row">Sodium</dt>
+                        <dd class="horizontal-row value">info</dd>
+                      </div>
+                      <div class="nutrition-subsection">
+                        <dt class="horizontal-row">Potassium</dt>
+                        <dd class="horizontal-row value">info</dd>
+                      </div>
+                      <div class="nutrition-subsection">
+                        <dt class="horizontal-row">Total Carbohydrate</dt>
+                        <dd class="horizontal-row value">info</dd>
+                        <dt class="horizontal-row row-indent">Dietary Fiber</dd>
+                        <dd class="horizontal-row value">info</dd>
+                        <dt class="horizontal-row row-indent">Sugars</dt>
+                        <dd class="horizontal-row value">info</dd>
+                      </div>
+                      <dt class="horizontal-row">Protein</dt>
+                      <dd class="horizontal-row value">info</dd>
+                    </div>
+                    <div style="font-size: 0.8rem;">* Percent Daily Values are based on a 2,000 calorie diet.</div>
+                </div>
+                <div>Ingredients</div>
+                <div>Warnings</div>
+                <div>Product Disclaimer</div>
+              </div>
+
+              <div class="product-half-column">
+                <h3 class="product-detail-heading">If Unavailable</h3>
+                <h3 class="product-detail-heading">Details</h3>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- Shopping List Modal Window -->
-<div class="modal fade" id="shoppingModal" tabindex="-1" role="dialog" aria-labelledby="modalShopping" aria-hidden="true">
+<div class="modal fade" id="shoppingModal" tabindex="-1" data-focus-on="input:first" role="dialog" aria-labelledby="modalShopping" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -31,176 +189,12 @@
       
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAllModals()">Cancel</button>
         <button type="submit" id="modal_button" class="btn btn-primary" onclick="passData()" data-dismiss="modal">Finish Adding</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingModal">
-  Shopping List
-</button> -->
-
-
-<!-- Item Detail Modal Window -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal_title" id="modalLabel">Item Detail</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="modal_left-column modal_content--scrollable modal_no-padding">
-              <div>
-                <div class="product-basic-details">
-                  <div class="product-half-column">
-                    <img id="imgInput" style="display: block; margin-right: auto; margin-left: auto; height: 12rem;">
-                    <div class="product-thumbnail-wrapper">
-                      <div class="product-detail-thumbnail-carousel">
-                        <div class="product-thumbnail-image">
-                          <img class="carousel-image" id="c1">
-                        </div>
-                        <div class="product-thumbnail-image">
-                          <img class="carousel-image" id="c2">
-                        </div>
-                        <div class="product-thumbnail-image">
-                          <img class="carousel-image" id="c3">
-                        </div>
-                        <div class="product-thumbnail-image">
-                          <img class="carousel-image" id="c4">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="product-half-column">
-                    <div class="product-title-price">
-                      <div>
-                        <div class="nameInput" style="font-weight: 450; width: 100%; font-size: 1.8rem; line-height: 2.7rem;"></div>
-                        <div class="product-detail-rating">Insert Rating</div>
-                      </div>
-                      <div class="product-price-cart">
-                        <div class="product-price-info">
-                          <div class="priceInput"></div>
-                          <div class="unitPriceInput"></div>
-                        </div>
-                        <div class="modal_add-button">
-                          <button class = "button add_cart"> Add to Cart </button>
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingModal" onclick="toggleFunc()">
-                            Shopping List
-                          </button> <!-- test -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="information-header">
-                  <h3 class="info-header-title">Information</h3>
-                </div>
-                <div class="product-basic-details">
-                  <div class="product-half-column">
-                    <div>
-                      <h3 class="product-detail-heading">Nutrition</h3>
-                      <div class="nutrition-quick-facts">
-                        <div class="nutrition-quick-facts_single">
-                          <div class="calInput"></div>
-                          <span style="text-transform: uppercase;">Calories</span>
-                        </div>
-                        <div class="nutrition-quick-facts_single">
-                          <div class="satfatInput"></div>
-                          <span style="text-transform: uppercase;">Sat Fat</span>
-                        </div>
-                        <div class="nutrition-quick-facts_single">
-                          <div class="sodInput"></div>
-                          <span style="text-transform: uppercase;">Sodium</span>
-                        </div>
-                        <div class="nutrition-quick-facts_single">
-                          <div class="sugInput"></div>
-                          <span style="text-transform: uppercase;">Sugars</span>
-                        </div>                        
-                      </div>
-                    </div>
-                    <div class="product-nutrition-facts-details">
-                      <h5 class="product-detail-heading">Nutrition Facts</h5>
-                        <div class="serving-info">
-                          <dt class="horizontal-row">Serving Size</dt>
-                          <dd class="horizontal-row value">info</dd>
-                          <dt class="horizontal-row">Servings Per Container</dt>
-                          <dd class="horizontal-row value">info</dd>
-                        </div>
-                      <h5 class="section-title">Amount Per Serving</h5>
-                        <div class="serving-info">
-                          <dt class="horizontal-row">Calories</dt>
-                          <dd class="horizontal-row value">info</dd>
-                          <dt class="horizontal-row">Calories from Fat</dt>
-                          <dd class="horizontal-row value">info</dd>
-                        </div>
-                      <h5 class="section-title title-daily">% Daily Value*</h5>
-                        <div class="serving-info">
-                          <div class="nutrition-subsection">
-                            <dt class="horizontal-row">Total Fat</dt>
-                            <dd class="horizontal-row value">info</dd>
-                            <dt class="horizontal-row row-indent">Saturated Fat</dd>
-                            <dd class="horizontal-row value">info</dd>
-                            <dt class="horizontal-row row-indent">Trans Fat</dt>
-                            <dd class="horizontal-row value">info</dd>
-                          </div>
-                          <div class="nutrition-subsection">
-                            <dt class="horizontal-row">Cholesterol</dt>
-                            <dd class="horizontal-row value">info</dd>
-                          </div>
-                          <div class="nutrition-subsection">
-                            <dt class="horizontal-row">Sodium</dt>
-                            <dd class="horizontal-row value">info</dd>
-                          </div>
-                          <div class="nutrition-subsection">
-                            <dt class="horizontal-row">Potassium</dt>
-                            <dd class="horizontal-row value">info</dd>
-                          </div>
-                          <div class="nutrition-subsection">
-                            <dt class="horizontal-row">Total Carbohydrate</dt>
-                            <dd class="horizontal-row value">info</dd>
-                            <dt class="horizontal-row row-indent">Dietary Fiber</dd>
-                            <dd class="horizontal-row value">info</dd>
-                            <dt class="horizontal-row row-indent">Sugars</dt>
-                            <dd class="horizontal-row value">info</dd>
-                          </div>
-                          <dt class="horizontal-row">Protein</dt>
-                          <dd class="horizontal-row value">info</dd>
-                        </div>
-                        <div style="font-size: 0.8rem;">* Percent Daily Values are based on a 2,000 calorie diet.</div>
-                    </div>
-                    <div>Ingredients</div>
-                    <div>Warnings</div>
-                    <div>Product Disclaimer</div>
-                  </div>
-
-                  <div class="product-half-column">
-                    <h3 class="product-detail-heading">If Unavailable</h3>
-                    <h3 class="product-detail-heading">Details</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-              
-            <div class="modal_right-column modal_content--scrollable">
-              <div>
-                <h6 class="product-detail-heading">Sponsored Suggestions</h6>
-              </div>
-              <div>
-                <h6 class="product-detail-heading">You Might Like</h6>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 <!-- include breadcrumbs? must decide. -->
 <!--products -->
@@ -235,7 +229,8 @@
                       <a href="#" class="itemDetailWindow" data-target="#exampleModal" data-toggle="modal" 
                         data-info="<%= items[i] %>" 
                         data-name="<%= items[i].name %>" 
-                        data-price="<%=items[i].price %>" 
+                        data-price="<%=items[i].price %>"
+                        data-id="<%=items[i].product_id %>" 
                         data-img="<%=  items[i].image %>"
                         data-size="<%= items[i].size %>"
                         data-unit="<%= items[i].unit_price %>"
@@ -309,6 +304,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script>
 var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT
+var shoppingSelect = 0;
 
 function PostRequest() {
   var request;
@@ -349,11 +345,19 @@ function GetRequest() {
 }
 
 
-$('.item-details button').click( function() {
+// $('.item-details button').click( function() {
+$('.add_cart').click( function() {
     var item = $(this).parent();
-    //$("#shoppingModal").modal();
-    // console.log($selectedRadio)
-    add_to_cart(item);
+    // if !($('#shoppingModal').is(':visible')) {
+    //   $("#shoppingModal").modal('toggle');
+    // }
+    // $("#shoppingModal").modal('show');
+    // // console.log($selectedRadio)
+    // if (shoppingSelect != 0) {
+      console.log("click add")
+      add_to_cart(item);
+    // }
+    // add_to_cart(item);
 });
 
 // source: https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal
@@ -361,6 +365,7 @@ $('.itemDetailWindow').click( function() {
   var nameDeet = $(this).data('name');
   var priceDeet = $(this).data('price');
   var imgDeet = $(this).data('img');
+  var idDeet = $(this).data('id');
 
   var c1Deet = $(this).data('img');
   var c2Deet = 'http://www.clker.com/cliparts/I/c/0/r/7/F/carrot-md.png';
@@ -393,6 +398,13 @@ $('.itemDetailWindow').click( function() {
   c2Img.src = c2Deet;
   c3Img.src = c3Deet;
   c4Img.src = c4Deet;
+
+  $(".modal_add-button").attr('data-id', idDeet);
+  $(".modal_add-button").attr('data-name', nameDeet);
+  $(".modal_add-button").attr('data-img', imgDeet);
+  $(".modal_add-button").attr('data-price', priceDeet);
+
+  //$(".modal_add-button").data-id(idDeet);
   // modalImg.src = 'http://www.clker.com/cliparts/I/c/0/r/7/F/carrot-md.png';
 })
 
@@ -480,14 +492,24 @@ function passData() {
        break;
      }
    }
-   console.log($selectedRadio)
+   //console.log($selectedRadio)
+   shoppingSelect = $selectedRadio;
+   console.log(shoppingSelect)
+   closeAllModals();
    //document.getElementById('purpose_input').innerHTML = $selectedRadio
 }
 
-function toggleFunc() {
-  $("#exampleModal").modal('toggle')
-  $("#shoppingModal").modal('toggle');
+
+function closeAllModals() {
+  if ($('#exampleModal').is(':visible')) {
+      $("#exampleModal").modal('toggle');
+  }
 }
+
+// function toggleFunc() {
+//   $("#exampleModal").modal('toggle')
+//   $("#shoppingModal").modal('toggle');
+// }
 
 </script>
 </body>

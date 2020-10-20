@@ -539,18 +539,6 @@ button.add_cart {
     text-align: center;
 }
 
-.modal_left-column {
-    width: 75%;
-    float: left;
-}
-
-.modal_right-column {
-    width: 25%;
-    float: left;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
-
 .modal_no-padding {
     padding: 0!important;
 }
