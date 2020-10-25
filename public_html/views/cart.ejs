@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <%- include partials/header.ejs %>
+<%- include partials/header.ejs %>
 </head>
 <body>
 
 <%- include partials/topnav.ejs %>
-<div class="container">
-<div class="shopping-cart">
+<% var cart_width = "90%"%>
+<div class="directory_container">
+<div class="shopping-cart" style="flex-basis: 80%;">
   <table>
     <tr class="table-header">
       <th class="product-image">Image</th>
@@ -61,9 +62,13 @@
 </div>
 
 </div>
+
+<div class="Leaderboard" style="flex-basis: 20%; padding: 20px;">
+<%include partials/leaderboard.ejs%>
 </div>
 
-<%include partials/leaderboard.ejs%>
+</div>
+
 <!-- //footer -->
 <%- include partials/footer.ejs %>
 

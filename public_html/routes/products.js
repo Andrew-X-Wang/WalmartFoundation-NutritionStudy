@@ -4,11 +4,11 @@ var con        = require('./database.js'); //in routes file already
 var async      = require('async');
 const perPage  = 12;
 
-var LEADER_SIZE = 10
+var LEADER_SIZE = 100;
 
 /* How to put this in a separate file :( need to be used in both cart.js and here*/
 async function get_leaderboard () {
-    var get_leaderboard = "SELECT users.username, carts.health_total " + 
+    var get_leaderboard = "SELECT users.username, users.user_id, carts.health_total " + 
                           "FROM users INNER JOIN carts " + 
                           "ON users.cart_id=carts.cart_id order by health_total desc " + 
                           "LIMIT ?;"
@@ -79,6 +79,7 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
     var offset      = (perPage * page) - perPage;
     filter          = (filter == "default" ? "price" : filter);
     var cart_id  = req.session.cart_id;
+    var user_id = req.session.user_id;
 
     var query_params  = product_parameters(category, subcategory, offset);
     var count_results = "SELECT COUNT(product_id) as numberOfProducts " +
@@ -96,12 +97,10 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
         var list        = await con.query(get_listItems, [cart_id]);    
         var leaderboard = await get_leaderboard();
 
-        console.log(leaderboard)
-        console.log("did it show anything?")
-
         var header = category + " - " + subcategory;
         header     = header.replace(/_/g, " ");
     
+        console.log("USER_ID: " + user_id);
         var render_params = {
                 header       : header,
                 items        : products,
@@ -110,7 +109,8 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
                 cart_count   : req.session.cart_count,
                 current_page : page,
                 pages        : (page <= total_pages ? total_pages : 0),
-                leaderboard  : leaderboard
+                leaderboard  : leaderboard,
+                user_id      : user_id
             }      
         res.render('sample-aisle', render_params);
 
