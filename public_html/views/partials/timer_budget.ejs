@@ -1,0 +1,14 @@
+<!doctype HTML>
+<style>
+  .resource_display {
+    font-size: 30;
+  }
+</style>
+
+<div class="resource_display" id="resource_display">
+  <% if (tracked_resource == "budget") { %>
+    <%=remaining_budget%>
+  <% } else if (tracked_resource == "time") { %>
+    <%=remaining_time%>"
+  <% } %>
+</div>

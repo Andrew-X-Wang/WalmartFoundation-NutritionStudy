@@ -80,7 +80,8 @@ $( document ).ready(function() {
     recalculateCart();
 });
 
-var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu" + PORT
+var PORT = 8003;
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu" + PORT;
 var taxRate = 0.05;
 var shippingRate = 9.00; 
 var fadeTime = 300;
@@ -143,6 +144,11 @@ function recalculateCart() {
         }
 
         $('.totals-value').fadeIn(fadeTime);
+    });
+
+    $('.resource_display').fadeOut(fadeTime, function() {
+        document.getElementById('resource_display').innerHTML = remaining_budget;
+        $('.resource_display').fadeIn(fadeTime);
     });
 }
 

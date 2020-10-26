@@ -26,7 +26,9 @@ router.get('/', auth, async function(req, res) {
     res.render('past-purchases.ejs', 
     { header     : "Your Past Purchases", 
       items      : all_carts,
-      cart_count : req.session.cart_count });
+      cart_count : req.session.cart_count,
+      tracked_resource : req.session.tracked_resource,
+      remaining_budget : req.session.remaining_budget });
 
   } catch(err) { console.log(err); res.send("error"); }
 });

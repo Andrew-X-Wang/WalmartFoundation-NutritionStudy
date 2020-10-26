@@ -25,7 +25,10 @@ router.get('/', auth, function(req, res) {
 
     res.render('index.ejs', 
         { header     : "Home", 
-          cart_count : req.session.cart_count });
+          cart_count : req.session.cart_count,
+          tracked_resource : req.session.tracked_resource,
+          remaining_budget : req.session.remaining_budget
+        });
 });
 
 /* Login */
@@ -34,7 +37,9 @@ router.get('/login', function(req, res){
 
     res.render('login.ejs', 
         { header     : "Welcome", 
-          cart_count : 0 });
+          cart_count : 0,
+          tracked_resource : null
+        });
 });
 
 /* Registration */
@@ -51,6 +56,8 @@ router.get('/browse-aisles', auth, function(req, res) {
     res.render('browse-aisles.ejs', 
         { header     : "Browse Aisles", 
           cart_count : req.session.cart_count,
+          tracked_resource : req.session.tracked_resource,
+          remaining_budget : req.session.remaining_budget,
           filter     : "default" });
 });
 
@@ -60,6 +67,8 @@ router.get('/help', auth, function(req, res) {
     res.render('help.ejs', 
         { header     : "Instructions", 
           cart_count : req.session.cart_count,
+          tracked_resource : req.session.tracked_resource,
+          remaining_budget : req.session.remaining_budget,
           filter     : "default" });
 });
 

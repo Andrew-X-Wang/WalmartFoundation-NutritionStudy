@@ -107,6 +107,8 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
                 listItems    : list,
                 filter       : filter,
                 cart_count   : req.session.cart_count,
+                tracked_resource : req.session.tracked_resource,
+                remaining_budget : req.session.remaining_budget,
                 current_page : page,
                 pages        : (page <= total_pages ? total_pages : 0),
                 leaderboard  : leaderboard,
