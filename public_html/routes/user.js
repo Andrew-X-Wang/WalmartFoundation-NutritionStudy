@@ -46,7 +46,7 @@ router.post('/auth', async function(req, res) {
     var password = req.body.password;
 
     var get_user = "SELECT * FROM users WHERE username = ? AND password = ?";
-    var get_cart = "SELECT total_count, remaining_budget FROM carts WHERE cart_id = ?";
+    var get_cart = "SELECT * FROM carts WHERE cart_id = ?";
 
     if (username && password) {
         try {
@@ -57,6 +57,7 @@ router.post('/auth', async function(req, res) {
                 req.session.username = username;
                 req.session.user_id  = login_results[0].user_id;
                 req.session.cart_id  = login_results[0].cart_id;
+                req.session.total_resource = login_results[0].total_resource;
                 req.session.tracked_resource = login_results[0].tracked_resource;
 
                 var cart_info =  await con.query(get_cart, [req.session.cart_id]);  
@@ -66,7 +67,7 @@ router.post('/auth', async function(req, res) {
                 res.redirect('/');    
             } else {
                 var error = "Incorrect Username and/or Password";
-                res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0});  
+                res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null});  
             }
         } catch(err) {console.log(err); res.send(err)}
 

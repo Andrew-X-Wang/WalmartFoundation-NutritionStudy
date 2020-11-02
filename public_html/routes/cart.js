@@ -2,7 +2,6 @@ var express  = require('express');
 var router   = express.Router();
 var con      = require('./database.js'); //in routes file already
 
-var taxRate = 0.05; 
 var LEADER_SIZE = 100;
 
 /* How to put this in a separate file :( need to be used in both producs.js and here*/
@@ -42,13 +41,13 @@ router.get('/', auth, async function(req, res) {
   try {
     var cart = await con.query(get_details, [req.session.cart_id]);
     var leaderboard = await get_leaderboard();
-    console.log(leaderboard);
 
     res.render('cart.ejs', 
     { header      : "Your Cart", 
       items       : cart,
       cart_count  : req.session.cart_count,
       tracked_resource : req.session.tracked_resource,
+      total_resource : req.session.total_resource,
       remaining_budget : req.session.remaining_budget,
       leaderboard : leaderboard,
       user_id     : user_id
@@ -65,18 +64,13 @@ router.post('/add', async function(req, res) {
 
     var upsert_product  = "INSERT INTO cart_items (cart_id, product_id, item_count) " + 
                           "VALUES (?) ON DUPLICATE KEY UPDATE item_count = item_count + 1";
-    var get_item_cost   = "SELECT price FROM products WHERE product_id = ?";
-    var update_cart     = "UPDATE carts SET total_count = ?, remaining_budget = ? WHERE cart_id = ?";
+    var cart_count_plus = "UPDATE carts SET total_count = total_count + 1 WHERE cart_id = ?";
 
     try {
         var upsert_result = await con.query(upsert_product, [new_item]); //insert
-        var item_cost     = await con.query(get_item_cost, [item_id]);
-        /* @TODO: any way to make taxRate/other future calculations for total cost universal?*/
-        item_cost = item_cost * (1 + taxRate);
+        var cart_plus_one = await con.query(cart_count_plus, [cart_id]); //update cart count/* @TODO: any way to make taxRate/other future calculations for total cost universal?*/
+        
         req.session.cart_count = req.session.cart_count + 1;
-        req.session.remaining_budget = req.session.remaining_budget - item_cost;
-        var update_result = await con.query(update_cart, [req.session.cart_count, req.session.remaining_budget, cart_id]); //update cart count, remaining_budget
-
         res.send(" " + req.session.cart_count);
 
     } catch (err) {console.log(err); res.send("error")}
@@ -84,24 +78,19 @@ router.post('/add', async function(req, res) {
 
 
 router.post('/remove', async function(req, res) {
-    alert("HELP REMOVE");
     var item_id = req.body.id;
     var cart_id = req.session.cart_id;
 
     var get_item_count     = "SELECT item_count FROM cart_items WHERE cart_id = ? AND product_id = ?"
-    var get_item_cost      = "SELECT price FROM products WHERE product_id = ?";
     var delete_product     = "DELETE FROM cart_items WHERE cart_id = ? AND product_id = ?";
-    var update_cart        = "UPDATE carts SET total_count = ?, remaining_budget = ? WHERE cart_id = ?"
+    var update_total_count = "UPDATE carts SET total_count = ? WHERE cart_id = ?"
 
     try {
         var item_count_result = await con.query(get_item_count, [cart_id, item_id]);
         var amount_deleted    = item_count_result[0].item_count;
-        var item_cost     = await con.query(get_item_cost, [item_id]);
-        /* @TODO: any way to make taxRate/other future calculations for total cost universal?*/
-        item_cost = item_cost * (1 + taxRate);
+        
         req.session.cart_count = req.session.cart_count - amount_deleted;
-        req.session.remaining_budget = req.session.remaining_budget + item_cost;
-
+        
         var remove_product = await con.query(delete_product, [cart_id, item_id]);
         var update_count   = await con.query(update_cart, [req.session.cart_count, req.session.remaining_budget, cart_id]);
 
@@ -112,7 +101,6 @@ router.post('/remove', async function(req, res) {
 
 
 router.post('/change-count', async function(req, res) {
-
     var item_id = req.body.id;
     var cart_id = req.session.cart_id;
     var count   = req.body.count;
@@ -132,6 +120,20 @@ router.post('/change-count', async function(req, res) {
 
     } catch (err) {res.send("Error")}
 });
+
+
+router.post('/update-budget', async function(req, res) {
+    var new_budget = req.body.budget;
+    var cart_id = req.session.cart_id;
+
+    var update_budget = "UPDATE carts SET remaining_budget = ? WHERE cart_id = ?";
+
+    try {
+        var update_result = await con.query(update_budget, [new_budget, cart_id]);
+        req.session.remaining_budget = new_budget;
+        res.send("");
+    } catch (err) {res.send("Error")}
+})
 
 
 router.post('/checkout-cart', async function(req, res) {

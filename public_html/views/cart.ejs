@@ -81,7 +81,7 @@ $( document ).ready(function() {
 });
 
 var PORT = 8003;
-var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu" + PORT;
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT;
 var taxRate = 0.05;
 var shippingRate = 9.00; 
 var fadeTime = 300;
@@ -93,12 +93,12 @@ function Request() {
     this.makeRequest = function(endpoint, data, callback) {
         request = new XMLHttpRequest();
         request.open("POST", requestURL + "/" + endpoint, true);
-
         request.onreadystatechange = 
             function () {
-                if(request.readyState === 4 && request.status === 200) {
+                if (request.readyState === 4 && request.status === 200) {
                     console.log("done with good request");
-                    callback(request);}
+                    callback(request);
+                }
             }
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         request.send(data);
@@ -146,9 +146,18 @@ function recalculateCart() {
         $('.totals-value').fadeIn(fadeTime);
     });
 
-    $('.resource_display').fadeOut(fadeTime, function() {
-        document.getElementById('resource_display').innerHTML = remaining_budget;
-        $('.resource_display').fadeIn(fadeTime);
+
+    /* Update remaining budget */
+    var newBudget = (<%=total_resource%> - total).toFixed(2);
+    var budgetRequest = new Request();
+    var budgetData = "budget=" + newBudget;
+    alert("HELLO");
+    budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
+        alert("HALEFAF");
+        $('.resource_display').fadeOut(fadeTime, function() {
+            document.getElementById('resource_display').innerHTML = newBudget;
+            $('.resource_display').fadeIn(fadeTime);
+        });
     });
 }
 
@@ -195,7 +204,6 @@ function removeItem(removeButton) {
 
     /* Post request to remove item from cart */
     request.makeRequest("cart/remove", data, function(request){
-
         /* Remove row from DOM and recalc cart total */
         product.slideUp(fadeTime, function() {
             product.remove();
