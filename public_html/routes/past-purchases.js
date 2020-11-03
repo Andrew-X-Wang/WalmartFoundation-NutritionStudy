@@ -28,7 +28,12 @@ router.get('/', auth, async function(req, res) {
       items      : all_carts,
       cart_count : req.session.cart_count,
       tracked_resource : req.session.tracked_resource,
-      remaining_budget : req.session.remaining_budget });
+      start_time : req.session.session_start_time,
+      total_time : req.session.total_time,
+      remaining_time : req.session.remaining_time,
+      total_budget : req.session.total_budget,
+      remaining_budget : req.session.remaining_budget
+    });
 
   } catch(err) { console.log(err); res.send("error"); }
 });

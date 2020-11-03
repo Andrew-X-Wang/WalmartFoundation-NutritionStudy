@@ -143,16 +143,18 @@ function recalculateCart() {
             $('.totals-value').fadeIn(fadeTime);
         });
 
-        /* Update remaining budget */
-        var newBudget = (<%=total_resource%> - total).toFixed(2);
-        var budgetRequest = new Request();
-        var budgetData = "budget=" + newBudget;
-        budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
-            $('.resource_display').fadeOut(fadeTime, function() {
-                document.getElementById('resource_display').innerHTML = newBudget;
-                $('.resource_display').fadeIn(fadeTime);
-            });
-        });
+        if ("<%=tracked_resource%>" == "budget") {
+            /* Update remaining budget */
+            var newBudget = (<%=total_budget%> - total).toFixed(2);
+            var budgetRequest = new Request();
+            var budgetData = "budget=" + newBudget;
+            budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
+                $('.resource_display').fadeOut(fadeTime, function() {
+                    document.getElementById('resource_display').innerHTML = "Remaining Budget: $" + newBudget;
+                    $('.resource_display').fadeIn(fadeTime);
+                });
+            });            
+        }
     })
 }
 
@@ -221,12 +223,12 @@ function removeItem(removeButton) {
 function checkoutCart(checkoutButton) {
     var request = new Request();
     console.log($(checkoutButton).parent().parent());
-    var data = $(checkoutButton).parent().parent(); // shopping cart div
+    var data = $(checkoutButton).parent().parent(); // shopping cart div; @TODO: is this data necessary to pass to api call?
 
     request.makeRequest("cart/checkout-cart", data, function(request) {
         cart_count = request.responseText;
         $('.badge').text(cart_count);
-        recalculateCart();
+        recalculateCart(); //@TODO: is this necessary?
         location.replace("http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/past-purchases");
     });
 }

@@ -74,15 +74,18 @@ router.get('/', auth, async function(req, res) {
     var cart = await con.query(get_details, [req.session.cart_id]);
     var leaderboard = await get_leaderboard();
 
-    res.render('cart.ejs', 
-    { header      : "Your Cart", 
-      items       : cart,
-      cart_count  : req.session.cart_count,
-      tracked_resource : req.session.tracked_resource,
-      total_resource : req.session.total_resource,
-      remaining_budget : req.session.remaining_budget,
-      leaderboard : leaderboard,
-      user_id     : user_id
+    res.render('cart.ejs', { 
+        header      : "Your Cart", 
+        items       : cart,
+        cart_count  : req.session.cart_count,
+        tracked_resource : req.session.tracked_resource,
+        start_time : req.session.session_start_time,
+        total_time : req.session.total_time,
+        remaining_time : req.session.remaining_time,
+        total_budget : req.session.total_budget,
+        remaining_budget : req.session.remaining_budget,
+        leaderboard : leaderboard,
+        user_id     : user_id
     });
 
   } catch(err) { console.log(err); res.send("error"); }
@@ -197,6 +200,21 @@ router.post('/checkout-cart', async function(req, res) {
         req.session.cart_count = 0;
 
         res.send("" + req.session.cart_count);
+    } catch (err) {res.send("Error")}
+});
+
+
+/* @TODO: Move somewhere else */
+/* Timer Update */
+router.post('/update-timer', async function(req, res) {
+    var remaining_time = req.body.remaining_time;
+    var cart_id = req.session.cart_id;
+    var update_timer = "UPDATE carts SET remaining_time = ? WHERE cart_id = ?;";
+
+    try {
+    var updated_timer = await con.query(update_timer, [remaining_time, cart_id]);
+    req.session.remaining_time = remaining_time;
+    res.send("");
     } catch (err) {res.send("Error")}
 });
 

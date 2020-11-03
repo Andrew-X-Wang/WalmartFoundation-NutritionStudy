@@ -48,6 +48,8 @@ router.post('/auth', async function(req, res) {
     var get_user = "SELECT * FROM users WHERE username = ? AND password = ?";
     var get_cart = "SELECT * FROM carts WHERE cart_id = ?";
 
+    var date = new Date();
+
     if (username && password) {
         try {
             var login_results = await con.query(get_user, [username, password]);
@@ -57,23 +59,26 @@ router.post('/auth', async function(req, res) {
                 req.session.username = username;
                 req.session.user_id  = login_results[0].user_id;
                 req.session.cart_id  = login_results[0].cart_id;
-                req.session.total_resource = login_results[0].total_resource;
+                req.session.total_budget = login_results[0].total_budget;
                 req.session.tracked_resource = login_results[0].tracked_resource;
+                req.session.session_start_time = date.getTime();
 
                 var cart_info =  await con.query(get_cart, [req.session.cart_id]);  
                 req.session.cart_count = cart_info[0].total_count;
                 req.session.remaining_budget = cart_info[0].remaining_budget;
+                req.session.total_time = cart_info[0].remaining_time;  // Remaining time at the start of the session. Should default to .total_time
+                req.session.remaining_time = cart_info[0].remaining_time;
 
                 res.redirect('/');    
             } else {
                 var error = "Incorrect Username and/or Password";
-                res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null, total_resource: null});  
+                res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null, total_budget: null, total_time: null});  
             }
         } catch(err) {console.log(err); res.send(err)}
 
     } else {
         var error = "Incorrect Username and/or Password";
-        res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null, total_resource: null});        
+        res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null, total_budget: null, total_time: null});        
     }
 });
 

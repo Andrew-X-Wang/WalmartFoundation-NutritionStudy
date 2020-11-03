@@ -1,14 +1,75 @@
 <!doctype HTML>
 <style>
   .resource_display {
-    font-size: 30;
+    font-size: 50;
   }
 </style>
 
+<!-- @TODO: how to do pretty print of date at start of page load? window.onload? -->
 <div class="resource_display" id="resource_display">
   <% if (tracked_resource == "budget") { %>
-    <%=remaining_budget%>
+    Remaining Budget: $<%= remaining_budget %>
   <% } else if (tracked_resource == "time") { %>
-    <%=remaining_time%>"
+    Remaining Time: <% new Date(remaining_time * 1000).toISOString().substr(11, 8) %>
   <% } %>
 </div>
+
+<script>
+var MILLIS_PER_SEC = 1000
+var PORT = 8003;
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT;
+
+//Make a post request object
+function Request() {
+    var request;
+
+    this.makeRequest = function(endpoint, data, callback) {
+        request = new XMLHttpRequest();
+        request.open("POST", requestURL + "/" + endpoint, true);
+        request.onreadystatechange = 
+            function () {
+                if (request.readyState === 4 && request.status === 200) {
+                    console.log("done with good request");
+                    callback(request);
+                }
+            }
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        request.send(data);
+    }
+}
+
+
+$( document ).ready(function() {
+    //Sync up timer to exact seconds left?
+});
+/* Assign actions */
+var timer_id = setInterval(timer, MILLIS_PER_SEC);
+
+function timer() {
+  if ("<%=tracked_resource%>" == "time") {
+    var date = new Date();
+    var curr_time = date.getTime();  // epoch millis
+    var elapsed_time = (curr_time - parseInt(<%=start_time%>)) / MILLIS_PER_SEC; // seconds
+    var remaining_time = <%=total_time%> - elapsed_time; // seconds
+    var remaining_time_pretty = new Date(remaining_time * 1000).toISOString().substr(11, 8)
+    document.getElementById("resource_display").innerHTML = "Remaining Time: " + remaining_time_pretty
+
+    var request = new Request();
+    var data = "remaining_time=" + remaining_time
+    request.makeRequest("cart/update-timer", data, function(request) {
+      // If out of time, checkout: @TODO: different behavior?
+      if (remaining_time < 0) {
+        var request = new Request();
+
+        request.makeRequest("cart/checkout-cart", "", function(request) {
+            cart_count = request.responseText;
+            $('.badge').text(cart_count);
+            location.replace("http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/past-purchases");
+        });
+      }
+    });
+  }
+}
+
+
+</script>

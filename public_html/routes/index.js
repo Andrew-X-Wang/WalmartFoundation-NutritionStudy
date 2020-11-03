@@ -27,6 +27,10 @@ router.get('/', auth, function(req, res) {
         { header     : "Home", 
           cart_count : req.session.cart_count,
           tracked_resource : req.session.tracked_resource,
+          start_time : req.session.session_start_time,
+          total_time : req.session.total_time,
+          remaining_time : req.session.remaining_time,
+          total_budget : req.session.total_budget,
           remaining_budget : req.session.remaining_budget
         });
 });
@@ -39,7 +43,9 @@ router.get('/login', function(req, res){
         { header     : "Welcome", 
           cart_count : 0,
           tracked_resource : null,
-          total_resource : null
+          total_budget : null,
+          total_time : null,
+          start_time : null,
         });
 });
 
@@ -58,6 +64,10 @@ router.get('/browse-aisles', auth, function(req, res) {
         { header     : "Browse Aisles", 
           cart_count : req.session.cart_count,
           tracked_resource : req.session.tracked_resource,
+          start_time : req.session.session_start_time,
+          total_time : req.session.total_time,
+          remaining_time : req.session.remaining_time,
+          total_budget : req.session.total_budget,
           remaining_budget : req.session.remaining_budget,
           filter     : "default" });
 });
@@ -69,9 +79,17 @@ router.get('/help', auth, function(req, res) {
         { header     : "Instructions", 
           cart_count : req.session.cart_count,
           tracked_resource : req.session.tracked_resource,
+          start_time : req.session.session_start_time,
+          total_time : req.session.total_time,
+          remaining_time : req.session.remaining_time,
+          total_budget : req.session.total_budget,
           remaining_budget : req.session.remaining_budget,
           filter     : "default" });
 });
 
+/* Timer Update */
+router.post('/update-timer', async function(req, res) {
+
+});
 
 module.exports = router;

@@ -443,7 +443,7 @@ function add_to_cart(item) {
         total = totals['total'];
 
         /* Update remaining budget */
-        var newBudget = (<%=total_resource%> - total).toFixed(2);
+        var newBudget = (<%=total_budget%> - total).toFixed(2);
         var budgetData = "budget=" + newBudget;
         post_request.makeRequest("cart/update-budget", budgetData, function(request) {
           $('.resource_display').fadeOut(fadeTime, function() {
