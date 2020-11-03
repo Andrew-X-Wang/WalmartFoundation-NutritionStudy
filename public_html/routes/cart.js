@@ -89,16 +89,6 @@ router.get('/', auth, async function(req, res) {
 });
 
 
-router.post('/get-total', async function(req, res) {
-    var cart_id = req.session.cart_id;
-
-    try {
-        var totals = await calc_cart_totals(cart_id);
-        res.send(totals['total']);
-    } catch(err) {res.send("error");}
-})
-
-
 router.post('/add', async function(req, res) {
     var item_id  = req.body.id;
     var cart_id  = req.session.cart_id;

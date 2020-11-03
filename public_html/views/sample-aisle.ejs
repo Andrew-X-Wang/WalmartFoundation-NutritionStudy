@@ -306,6 +306,7 @@
 var PORT = 8003;
 var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT
 var shoppingSelect = 0;
+var fadeTime = 300;
 
 function PostRequest() {
   var request;
@@ -418,14 +419,14 @@ $('.product-thumbnail-image').click( function () {
 
 function add_to_cart(item) {
 
-  var request = new PostRequest();
+  var post_request = new PostRequest();
 
   var data = "id="     + item.attr('data-id')   + 
              "&name="  + item.attr('data-name') +
              "&img="   + item.attr('data-img')  +
              "&price=" + item.attr('data-price');
 
-  request.makeRequest("cart/add", data, function(request){
+  post_request.makeRequest("cart/add", data, function(request){
 
       cart_count = request.responseText;
 
@@ -436,6 +437,21 @@ function add_to_cart(item) {
           $('.badge').text(cart_count);
         }
       }
+
+      post_request.makeRequest("cart/recalculate-totals", "", function(request) {
+        var totals = JSON.parse(request.responseText);
+        total = totals['total'];
+
+        /* Update remaining budget */
+        var newBudget = (<%=total_resource%> - total).toFixed(2);
+        var budgetData = "budget=" + newBudget;
+        post_request.makeRequest("cart/update-budget", budgetData, function(request) {
+          $('.resource_display').fadeOut(fadeTime, function() {
+            document.getElementById('resource_display').innerHTML = newBudget;
+            $('.resource_display').fadeIn(fadeTime);
+          });
+        });
+      });
   });
 }
 
