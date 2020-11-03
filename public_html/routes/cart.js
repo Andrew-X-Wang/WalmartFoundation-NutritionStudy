@@ -2,6 +2,8 @@ var express  = require('express');
 var router   = express.Router();
 var con      = require('./database.js'); //in routes file already
 
+var taxRate = 0.05;
+var shippingRate = 9.00; 
 var LEADER_SIZE = 100;
 
 /* How to put this in a separate file :( need to be used in both producs.js and here*/
@@ -14,9 +16,39 @@ async function get_leaderboard () {
         var leaderboard = await con.query(get_leaderboard, [LEADER_SIZE]);
     } catch (err) {
         console.log(err);
-        res.send("ERROR");
     }
     return leaderboard;
+}
+
+async function calc_cart_totals(cart_id) {
+    var get_item_info = "SELECT cart_items.item_count, products.price " + 
+                        "FROM cart_items join products " + 
+                        "ON cart_items.product_id = products.product_id " +
+                        "WHERE cart_items.cart_id = ?;";
+    var totals = {
+        "subtotal": 0,
+        "tax": 0,
+        "total": 0
+    }
+
+    try {
+        var subtotal = 0;
+        var item_count;
+        var unit_price;
+        var cart_item_info = await con.query(get_item_info, [cart_id]);
+        for (var i = 0; i < cart_item_info.length; i ++) {
+            item_count = cart_item_info[i]['item_count'];
+            unit_price = cart_item_info[i]['price'];
+            subtotal += item_count * unit_price;
+        }
+
+        /* Calculate totals */
+        totals['subtotal'] = subtotal;
+        totals['tax'] = subtotal * taxRate;
+        totals['total'] = subtotal + totals['tax'];
+    } catch(err) {console.log("Error calculating cart totals");}
+
+    return totals;
 }
 
 
@@ -57,6 +89,16 @@ router.get('/', auth, async function(req, res) {
 });
 
 
+router.post('/get-total', async function(req, res) {
+    var cart_id = req.session.cart_id;
+
+    try {
+        var totals = await calc_cart_totals(cart_id);
+        res.send(totals['total']);
+    } catch(err) {res.send("error");}
+})
+
+
 router.post('/add', async function(req, res) {
     var item_id  = req.body.id;
     var cart_id  = req.session.cart_id;
@@ -68,8 +110,8 @@ router.post('/add', async function(req, res) {
 
     try {
         var upsert_result = await con.query(upsert_product, [new_item]); //insert
-        var cart_plus_one = await con.query(cart_count_plus, [cart_id]); //update cart count/* @TODO: any way to make taxRate/other future calculations for total cost universal?*/
-        
+        var cart_plus_one = await con.query(cart_count_plus, [cart_id]); //update cart count/*
+
         req.session.cart_count = req.session.cart_count + 1;
         res.send(" " + req.session.cart_count);
 
@@ -92,7 +134,7 @@ router.post('/remove', async function(req, res) {
         req.session.cart_count = req.session.cart_count - amount_deleted;
         
         var remove_product = await con.query(delete_product, [cart_id, item_id]);
-        var update_count   = await con.query(update_cart, [req.session.cart_count, req.session.remaining_budget, cart_id]);
+        var update_count   = await con.query(update_total_count, [req.session.cart_count, cart_id]);
 
         res.send(" " + req.session.cart_count);
 
@@ -120,6 +162,16 @@ router.post('/change-count', async function(req, res) {
 
     } catch (err) {res.send("Error")}
 });
+
+
+router.post('/recalculate-totals', async function(req, res) {
+    var cart_id = req.session.cart_id;
+
+    try {
+        var totals = await calc_cart_totals(cart_id);
+        res.send(totals);
+    } catch(err) {res.send("Error")}
+})
 
 
 router.post('/update-budget', async function(req, res) {

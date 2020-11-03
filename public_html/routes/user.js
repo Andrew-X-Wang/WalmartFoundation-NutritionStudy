@@ -67,13 +67,13 @@ router.post('/auth', async function(req, res) {
                 res.redirect('/');    
             } else {
                 var error = "Incorrect Username and/or Password";
-                res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null});  
+                res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null, total_resource: null});  
             }
         } catch(err) {console.log(err); res.send(err)}
 
     } else {
         var error = "Incorrect Username and/or Password";
-        res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0});        
+        res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null, total_resource: null});        
     }
 });
 

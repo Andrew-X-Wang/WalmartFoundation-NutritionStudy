@@ -38,7 +38,8 @@ router.get('/login', function(req, res){
     res.render('login.ejs', 
         { header     : "Welcome", 
           cart_count : 0,
-          tracked_resource : null
+          tracked_resource : null,
+          total_resource : null
         });
 });
 

@@ -121,44 +121,39 @@ $('.checkout').click( function() {
 
 /* Recalculate cart */
 function recalculateCart() {
-    var subtotal = 0;
-    /* Sum up row totals */
-    $('.product').each(function () {
-        subtotal += parseFloat($(this).children('.product-line-price').text());
-    });
+    var cartTotalRequest = new Request();
+    cartTotalRequest.makeRequest("cart/recalculate-totals", "", function(request) {
+        var totals = JSON.parse(request.responseText);
+        var subtotal = totals['subtotal'];
+        var tax = totals['tax'];
+        var total = totals['total'];
 
-    /* Calculate totals */
-    var tax   = subtotal * taxRate;
-    var total = subtotal + tax;
+        /* Update totals display */
+        $('.totals-value').fadeOut(fadeTime, function() {
+            $('#cart-subtotal').html(subtotal.toFixed(2));
+            $('#cart-tax').html(tax.toFixed(2));
+            $('#cart-total').html(total.toFixed(2));
 
-    /* Update totals display */
-    $('.totals-value').fadeOut(fadeTime, function() {
-        $('#cart-subtotal').html(subtotal.toFixed(2));
-        $('#cart-tax').html(tax.toFixed(2));
-        $('#cart-total').html(total.toFixed(2));
+            if(total == 0){
+                $('.checkout').fadeOut(fadeTime);
+            }else{
+                $('.checkout').fadeIn(fadeTime);
+            }
 
-        if(total == 0){
-            $('.checkout').fadeOut(fadeTime);
-        }else{
-            $('.checkout').fadeIn(fadeTime);
-        }
-
-        $('.totals-value').fadeIn(fadeTime);
-    });
-
-
-    /* Update remaining budget */
-    var newBudget = (<%=total_resource%> - total).toFixed(2);
-    var budgetRequest = new Request();
-    var budgetData = "budget=" + newBudget;
-    alert("HELLO");
-    budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
-        alert("HALEFAF");
-        $('.resource_display').fadeOut(fadeTime, function() {
-            document.getElementById('resource_display').innerHTML = newBudget;
-            $('.resource_display').fadeIn(fadeTime);
+            $('.totals-value').fadeIn(fadeTime);
         });
-    });
+
+        /* Update remaining budget */
+        var newBudget = (<%=total_resource%> - total).toFixed(2);
+        var budgetRequest = new Request();
+        var budgetData = "budget=" + newBudget;
+        budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
+            $('.resource_display').fadeOut(fadeTime, function() {
+                document.getElementById('resource_display').innerHTML = newBudget;
+                $('.resource_display').fadeIn(fadeTime);
+            });
+        });
+    })
 }
 
 
