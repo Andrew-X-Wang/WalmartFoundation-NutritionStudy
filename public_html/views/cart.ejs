@@ -143,15 +143,15 @@ function recalculateCart() {
             $('.totals-value').fadeIn(fadeTime);
         });
 
-        if ("<%=tracked_resource%>" == "budget") {
+        if (<%=tracking_budget%>) {
             /* Update remaining budget */
             var newBudget = (<%=total_budget%> - total).toFixed(2);
             var budgetRequest = new Request();
             var budgetData = "budget=" + newBudget;
             budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
-                $('.resource_display').fadeOut(fadeTime, function() {
-                    document.getElementById('resource_display').innerHTML = "Remaining Budget: $" + newBudget;
-                    $('.resource_display').fadeIn(fadeTime);
+                $('.budget_display').fadeOut(fadeTime, function() {
+                    document.getElementById('budget_display').innerHTML = "Remaining Budget: $" + newBudget;
+                    $('.budget_display').fadeIn(fadeTime);
                 });
             });            
         }

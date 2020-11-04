@@ -78,7 +78,8 @@ router.get('/', auth, async function(req, res) {
         header      : "Your Cart", 
         items       : cart,
         cart_count  : req.session.cart_count,
-        tracked_resource : req.session.tracked_resource,
+        tracking_budget : req.session.tracking_budget,
+        tracking_time : req.session.tracking_time,
         start_time : req.session.session_start_time,
         total_time : req.session.total_time,
         remaining_time : req.session.remaining_time,
@@ -198,6 +199,7 @@ router.post('/checkout-cart', async function(req, res) {
 
         req.session.cart_id    = new_cart_id[0].cart_id;
         req.session.cart_count = 0;
+        req.session.checked_out = 1;
 
         res.send("" + req.session.cart_count);
     } catch (err) {res.send("Error")}
@@ -205,7 +207,7 @@ router.post('/checkout-cart', async function(req, res) {
 
 
 /* @TODO: Move somewhere else */
-/* Timer Update */
+/* Timer Update, also returns cart checkout status */
 router.post('/update-timer', async function(req, res) {
     var remaining_time = req.body.remaining_time;
     var cart_id = req.session.cart_id;
@@ -214,7 +216,7 @@ router.post('/update-timer', async function(req, res) {
     try {
     var updated_timer = await con.query(update_timer, [remaining_time, cart_id]);
     req.session.remaining_time = remaining_time;
-    res.send("");
+    res.send("" + req.session.checked_out);
     } catch (err) {res.send("Error")}
 });
 

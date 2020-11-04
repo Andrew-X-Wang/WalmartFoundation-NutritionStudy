@@ -60,26 +60,46 @@ router.post('/auth', async function(req, res) {
                 req.session.user_id  = login_results[0].user_id;
                 req.session.cart_id  = login_results[0].cart_id;
                 req.session.total_budget = login_results[0].total_budget;
-                req.session.tracked_resource = login_results[0].tracked_resource;
+                req.session.tracking_budget = login_results[0].tracking_budget;
+                req.session.tracking_time = login_results[0].tracking_time;
                 req.session.session_start_time = date.getTime();
 
                 var cart_info =  await con.query(get_cart, [req.session.cart_id]);  
                 req.session.cart_count = cart_info[0].total_count;
                 req.session.remaining_budget = cart_info[0].remaining_budget;
-                req.session.total_time = cart_info[0].remaining_time;  // Remaining time at the start of the session. Should default to .total_time
+                req.session.total_time = cart_info[0].remaining_time;  // Remaining time at the start of the session. Should default to .total_time. @TODO make time_elapsed, so remaining_time calculation = users.total_time - carts.elapsed_time - (session elapsed time)
                 req.session.remaining_time = cart_info[0].remaining_time;
+                req.session.checked_out = cart_info[0].checked_out;
 
                 res.redirect('/');    
             } else {
                 var error = "Incorrect Username and/or Password";
-                res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null, total_budget: null, total_time: null});  
+                var render_params = {
+                    header: "Welcome", 
+                    error: error, 
+                    cart_count: 0, 
+                    tracking_budget: null, 
+                    tracking_time: null, 
+                    total_budget: null, 
+                    total_time: null
+                };
             }
+                res.render('login.ejs', render_params);
         } catch(err) {console.log(err); res.send(err)}
 
     } else {
         var error = "Incorrect Username and/or Password";
-        res.render('login.ejs', {header: "Welcome", error: error, cart_count: 0, tracked_resource: null, total_budget: null, total_time: null});        
+        var render_params = {
+            header: "Welcome", 
+            error: error, 
+            cart_count: 0, 
+            tracking_budget: null, 
+            tracking_time: null, 
+            total_budget: null, 
+            total_time: null
+        };
     }
+        res.render('login.ejs', render_params);        
 });
 
 module.exports = router;
