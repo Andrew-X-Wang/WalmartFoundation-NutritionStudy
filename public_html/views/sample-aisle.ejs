@@ -446,9 +446,9 @@ function add_to_cart(item) {
         var newBudget = (<%=total_budget%> - total).toFixed(2);
         var budgetData = "budget=" + newBudget;
         post_request.makeRequest("cart/update-budget", budgetData, function(request) {
-          $('.resource_display').fadeOut(fadeTime, function() {
-            document.getElementById('resource_display').innerHTML = newBudget;
-            $('.resource_display').fadeIn(fadeTime);
+          $('.budget_display').fadeOut(fadeTime, function() {
+            document.getElementById('budget_display').innerHTML = newBudget;
+            $('.budget_display').fadeIn(fadeTime);
           });
         });
       });
