@@ -85,6 +85,7 @@ router.get('/', auth, async function(req, res) {
         remaining_time : req.session.remaining_time,
         total_budget : req.session.total_budget,
         remaining_budget : req.session.remaining_budget,
+        checked_out : req.session.checked_out,
         leaderboard : leaderboard,
         user_id     : user_id
     });
