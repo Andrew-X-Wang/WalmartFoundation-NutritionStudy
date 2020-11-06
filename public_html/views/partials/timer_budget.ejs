@@ -5,7 +5,7 @@
   }
 </style>
 
-<!-- @TODO: how to do pretty print of date at start of page load? window.onload? -->
+<!-- @TODO: remaining_time does not exist/is undefined while remaining_budget gets its correct value -->
 <div class="resource_display" id="resource_display">
   <% if (tracking_budget) { %>
     <div class="budget_display", id="budget_display">
@@ -20,10 +20,12 @@
 </div>
 
 <script>
-var MILLIS_PER_SEC = 1000
+var MILLIS_PER_SEC = 1000;
+var SECS_PER_MINUTE = 60;
 var PORT = 8003;
 var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT;
 var timer_id;
+var time_alert_thresholds = [5 * SECS_PER_MINUTE, 1 * SECS_PER_MINUTE];
 var remaining;
 
 //Make a post request object
@@ -46,9 +48,9 @@ function Request() {
 }
 
 
+/* Assign actions */
 $( document ).ready(function() {
   //@TODO: Sync up timer to exact seconds left?
-  /* Assign actions */
   if (!<%=checked_out%>) {
     timer_id = setInterval(timer, MILLIS_PER_SEC);
     console.log("SET TIMER ID TO: " + timer_id);    
@@ -84,6 +86,16 @@ function timer() {
       // console.log("Remaining_time: " + remaining_time);
       // var remaining = parseInt(request.responseText[0]);
       // console.log("req.session.remaining_time: " + remaining)
+      var threshold;
+      for (var i = 0; i < time_alert_thresholds.length; i ++) {
+        threshold = time_alert_thresholds[i];
+        if (Math.floor(remaining_time) == threshold) {
+          var threshold_mins = threshold / SECS_PER_MINUTE;
+          var plural = (threshold_mins != 1) ? "s" : "";
+          alert("You have " + threshold_mins + " minute" + plural + " left to complete your shopping list.")
+          break;
+        }
+      }
       if (remaining_time <= 0 /*&& !checked_out*/) {
         /* Stop timer */
         clearInterval(timer_id);
