@@ -33,7 +33,8 @@ router.get('/', auth, async function(req, res) {
       total_time : req.session.total_time,
       remaining_time : req.session.remaining_time,
       total_budget : req.session.total_budget,
-      remaining_budget : req.session.remaining_budget
+      remaining_budget : req.session.remaining_budget,
+      checked_out : req.session.checked_out
     });
 
   } catch(err) { console.log(err); res.send("error"); }

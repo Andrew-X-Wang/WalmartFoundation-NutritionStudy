@@ -81,7 +81,8 @@ router.post('/auth', async function(req, res) {
                     tracking_budget: null, 
                     tracking_time: null, 
                     total_budget: null, 
-                    total_time: null
+                    total_time: null,
+                    checked_out: null
                 };
             }
                 res.render('login.ejs', render_params);
@@ -96,7 +97,8 @@ router.post('/auth', async function(req, res) {
             tracking_budget: null, 
             tracking_time: null, 
             total_budget: null, 
-            total_time: null
+            total_time: null,
+            checked_out: null
         };
     }
         res.render('login.ejs', render_params);        

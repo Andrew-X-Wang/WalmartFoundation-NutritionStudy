@@ -215,8 +215,8 @@ router.post('/update-timer', async function(req, res) {
 
     try {
     var updated_timer = await con.query(update_timer, [remaining_time, cart_id]);
-    req.session.remaining_time = remaining_time;
-    res.send("" + req.session.checked_out);
+    // req.session.remaining_time = remaining_time;
+    res.send(""/* + req.session.remaining_time*/);
     } catch (err) {res.send("Error")}
 });
 

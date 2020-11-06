@@ -114,6 +114,7 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
                 remaining_time : req.session.remaining_time,
                 total_budget : req.session.total_budget,
                 remaining_budget : req.session.remaining_budget,
+                checked_out : req.session.checked_out,
                 current_page : page,
                 pages        : (page <= total_pages ? total_pages : 0),
                 leaderboard  : leaderboard,
