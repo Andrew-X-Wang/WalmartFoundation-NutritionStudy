@@ -444,6 +444,10 @@ function add_to_cart(item) {
 
         /* Update remaining budget */
         var newBudget = (<%=total_budget%> - total).toFixed(2);
+        if (newBudget < 0) {
+          var overBudget = (-newBudget).toFixed(2);
+          alert("This item puts you $" + overBudget + " over budget. You will not be able to checkout if you are over budget.");
+        }
         var budgetData = "budget=" + newBudget;
         post_request.makeRequest("cart/update-budget", budgetData, function(request) {
           $('.budget_display').fadeOut(fadeTime, function() {

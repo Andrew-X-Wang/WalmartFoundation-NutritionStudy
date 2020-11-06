@@ -77,7 +77,7 @@
 <script>
 /* Display cart totals, etc. */
 $( document ).ready(function() {
-    recalculateCart();
+    recalculateCart(true);
 });
 
 var PORT = 8003;
@@ -120,7 +120,7 @@ $('.checkout').click( function() {
 });
 
 /* Recalculate cart */
-function recalculateCart() {
+function recalculateCart(onload=false) {
     var cartTotalRequest = new Request();
     cartTotalRequest.makeRequest("cart/recalculate-totals", "", function(request) {
         var totals = JSON.parse(request.responseText);
@@ -146,6 +146,11 @@ function recalculateCart() {
         if (<%=tracking_budget%>) {
             /* Update remaining budget */
             var newBudget = (<%=total_budget%> - total).toFixed(2);
+            if (newBudget < 0) {
+                var overBudget = (-newBudget).toFixed(2);
+                var message_start = (onload) ? "You are currently $" : "This item puts you $";
+                alert(message_start + overBudget + " over budget. You will not be able to checkout if you are over budget.");
+            }
             var budgetRequest = new Request();
             var budgetData = "budget=" + newBudget;
             budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
@@ -221,6 +226,18 @@ function removeItem(removeButton) {
 
 /* Checkout items and create new empty cart for user */
 function checkoutCart(checkoutButton) {
+    if (<%=tracking_budget%>) {
+        /* Parsing out numerical value */
+        var curr_budget = $('.budget_display').text().match(/[-]?[\.\d]+/);
+        console.log("Current budget: " + curr_budget);
+        alert("CHECKING OUT");
+        if (curr_budget < 0) {
+            var overBudget = (-curr_budget).toFixed(2);
+            alert("You are $" + overBudget + " over budget, you must be at or below budget to check out.");
+            return;
+        }
+    }
+
     var request = new Request();
     console.log($(checkoutButton).parent().parent());
     var data = $(checkoutButton).parent().parent(); // shopping cart div; @TODO: is this data necessary to pass to api call?
