@@ -215,9 +215,9 @@ router.post('/update-timer', async function(req, res) {
     var update_timer = "UPDATE carts SET remaining_time = ? WHERE cart_id = ?;";
 
     try {
-    var updated_timer = await con.query(update_timer, [remaining_time, cart_id]);
-    // req.session.remaining_time = remaining_time;
-    res.send(""/* + req.session.remaining_time*/);
+        var updated_timer = await con.query(update_timer, [remaining_time, cart_id]);
+        req.session.remaining_time = remaining_time;
+        res.send("");
     } catch (err) {res.send("Error")}
 });
 

@@ -20,7 +20,7 @@
   <% } %>
   <% if (tracking_time) { %>
     <div class="time_display", id="time_display">
-      <% new Date(remaining_time * 1000).toISOString().substr(11, 8) %>
+      <%=new Date(remaining_time * 1000).toISOString().substr(11, 8) %>
     </div>
   <% } %>
 </div>
