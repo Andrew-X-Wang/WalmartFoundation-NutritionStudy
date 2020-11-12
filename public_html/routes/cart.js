@@ -177,7 +177,7 @@ router.post('/update-budget', async function(req, res) {
 
     try {
         var update_result = await con.query(update_budget, [new_budget, cart_id]);
-        req.session.remaining_budget = new_budget;
+        req.session.remaining_budget = parseFloat(new_budget);
         res.send("");
     } catch (err) {res.send("Error")}
 })

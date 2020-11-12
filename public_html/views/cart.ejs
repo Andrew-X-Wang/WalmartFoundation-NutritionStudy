@@ -155,7 +155,7 @@ function recalculateCart(onload=false) {
             var budgetData = "budget=" + newBudget;
             budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
                 $('.budget_display').fadeOut(fadeTime, function() {
-                    document.getElementById('budget_display').innerHTML = "Remaining Budget: $" + newBudget;
+                    document.getElementById('budget_display').innerHTML = newBudget;
                     $('.budget_display').fadeIn(fadeTime);
                 });
             });            

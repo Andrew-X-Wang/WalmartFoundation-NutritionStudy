@@ -3,18 +3,24 @@
   .resource_display {
     font-size: 50;
   }
+  .budget_display::before {
+    content: "Remaining Budget: $";
+  }
+  .time_display::before {
+    content: "Remaining Time: ";
+  }
 </style>
 
 <!-- @TODO: remaining_time does not exist/is undefined while remaining_budget gets its correct value -->
 <div class="resource_display" id="resource_display">
   <% if (tracking_budget) { %>
     <div class="budget_display", id="budget_display">
-      Remaining Budget: $<%= remaining_budget %>
+      <%=remaining_budget.toFixed(2) %>
     </div>
   <% } %>
   <% if (tracking_time) { %>
     <div class="time_display", id="time_display">
-      Remaining Time: <% new Date(remaining_time * 1000).toISOString().substr(11, 8) %>
+      <% new Date(remaining_time * 1000).toISOString().substr(11, 8) %>
     </div>
   <% } %>
 </div>
@@ -78,14 +84,11 @@ function timer() {
       remaining_time = 0;
     }
     var remaining_time_pretty = pretty_print_time(remaining_time);
-    document.getElementById("time_display").innerHTML = "Remaining Time: " + remaining_time_pretty;
+    document.getElementById("time_display").innerHTML = remaining_time_pretty;
 
     var request = new Request();
     var data = "remaining_time=" + remaining_time
     request.makeRequest("cart/update-timer", data, function(request) {
-      // console.log("Remaining_time: " + remaining_time);
-      // var remaining = parseInt(request.responseText[0]);
-      // console.log("req.session.remaining_time: " + remaining)
       var threshold;
       for (var i = 0; i < time_alert_thresholds.length; i ++) {
         threshold = time_alert_thresholds[i];
@@ -96,7 +99,7 @@ function timer() {
           break;
         }
       }
-      if (remaining_time <= 0 /*&& !checked_out*/) {
+      if (remaining_time <= 0) {
         /* Stop timer */
         clearInterval(timer_id);
 
