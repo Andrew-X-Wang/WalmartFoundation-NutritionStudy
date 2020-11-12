@@ -84,8 +84,8 @@ router.post('/auth', async function(req, res) {
                     total_time: null,
                     checked_out: null
                 };
-            }
                 res.render('login.ejs', render_params);
+            }
         } catch(err) {console.log(err); res.send(err)}
 
     } else {
@@ -100,8 +100,8 @@ router.post('/auth', async function(req, res) {
             total_time: null,
             checked_out: null
         };
+        res.render('login.ejs', render_params);
     }
-        res.render('login.ejs', render_params);        
 });
 
 module.exports = router;
