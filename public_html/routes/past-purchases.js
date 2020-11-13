@@ -26,7 +26,16 @@ router.get('/', auth, async function(req, res) {
     res.render('past-purchases.ejs', 
     { header     : "Your Past Purchases", 
       items      : all_carts,
-      cart_count : req.session.cart_count });
+      cart_count : req.session.cart_count,
+      tracking_budget : req.session.tracking_budget,
+      tracking_time : req.session.tracking_time,
+      start_time : req.session.session_start_time,
+      total_time : req.session.total_time,
+      remaining_time : req.session.remaining_time,
+      total_budget : req.session.total_budget,
+      remaining_budget : req.session.remaining_budget,
+      checked_out : req.session.checked_out
+    });
 
   } catch(err) { console.log(err); res.send("error"); }
 });

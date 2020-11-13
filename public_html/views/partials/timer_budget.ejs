@@ -1,0 +1,119 @@
+<!doctype HTML>
+<style>
+  .resource_display {
+    font-size: 50;
+  }
+  .budget_display::before {
+    content: "Remaining Budget: $";
+  }
+  .time_display::before {
+    content: "Remaining Time: ";
+  }
+</style>
+
+<!-- @TODO: remaining_time does not exist/is undefined while remaining_budget gets its correct value -->
+<div class="resource_display" id="resource_display">
+  <% if (tracking_budget) { %>
+    <div class="budget_display", id="budget_display">
+      <%=remaining_budget.toFixed(2) %>
+    </div>
+  <% } %>
+  <% if (tracking_time) { %>
+    <div class="time_display", id="time_display">
+      <%=new Date(remaining_time * 1000).toISOString().substr(11, 8) %>
+    </div>
+  <% } %>
+</div>
+
+<script>
+var MILLIS_PER_SEC = 1000;
+var SECS_PER_MINUTE = 60;
+var PORT = 8003;
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT;
+var timer_id;
+var time_alert_thresholds = [5 * SECS_PER_MINUTE, 1 * SECS_PER_MINUTE];
+var remaining;
+
+//Make a post request object
+function Request() {
+    var request;
+
+    this.makeRequest = function(endpoint, data, callback) {
+        request = new XMLHttpRequest();
+        request.open("POST", requestURL + "/" + endpoint, true);
+        request.onreadystatechange = 
+            function () {
+                if (request.readyState === 4 && request.status === 200) {
+                    console.log("done with good request");
+                    callback(request);
+                }
+            }
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        request.send(data);
+    }
+}
+
+
+/* Assign actions */
+$( document ).ready(function() {
+  //@TODO: Sync up timer to exact seconds left?
+  if (!<%=checked_out%>) {
+    timer_id = setInterval(timer, MILLIS_PER_SEC);
+    console.log("SET TIMER ID TO: " + timer_id);    
+  }
+
+  <% if (tracking_time) { %>
+      remaining = <%= remaining_time %>
+  <% } %>
+});
+
+
+function pretty_print_time(seconds) {
+  var seconds_pretty_printed = new Date(seconds * 1000).toISOString().substr(11, 8);
+  return seconds_pretty_printed
+}
+
+
+function timer() {
+  if (<%=tracking_time%>) {
+    var date = new Date();
+    var curr_time = date.getTime();  // epoch millis
+    var elapsed_time = (curr_time - parseInt(<%=start_time%>)) / MILLIS_PER_SEC; // seconds
+    var remaining_time = <%=total_time%> - elapsed_time; // seconds
+    if (remaining_time < 0) {
+      remaining_time = 0;
+    }
+    var remaining_time_pretty = pretty_print_time(remaining_time);
+    document.getElementById("time_display").innerHTML = remaining_time_pretty;
+
+    var request = new Request();
+    var data = "remaining_time=" + remaining_time
+    request.makeRequest("cart/update-timer", data, function(request) {
+      var threshold;
+      for (var i = 0; i < time_alert_thresholds.length; i ++) {
+        threshold = time_alert_thresholds[i];
+        if (Math.floor(remaining_time) == threshold) {
+          var threshold_mins = threshold / SECS_PER_MINUTE;
+          var plural = (threshold_mins != 1) ? "s" : "";
+          alert("You have " + threshold_mins + " minute" + plural + " left to complete your shopping list.")
+          break;
+        }
+      }
+      if (remaining_time <= 0) {
+        /* Stop timer */
+        clearInterval(timer_id);
+
+        var request = new Request();
+        request.makeRequest("cart/checkout-cart", "", function(request) {
+          cart_count = request.responseText;
+          $('.badge').text(cart_count);
+          /* @TODO: prevent user from leaving checkout page/other pages redirect to checkout after checked_out = true */
+          location.replace("http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/past-purchases");
+          checked_out = true;
+        });
+      }
+    });
+  }
+}
+
+</script>

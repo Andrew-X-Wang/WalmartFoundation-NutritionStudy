@@ -1,4 +1,6 @@
+<!doctype HTML>
 <!-- begin topnav partial -->
+<% PORT = "8003"%>
 <div class="top_header">
     <div class="container">
       <div class="header_contents">
@@ -6,7 +8,7 @@
           <!-- <li><a href="/registration"> Create Account </a></li> -->
           <li><a href="/login">Login</a></li>
           <li><a href="/help">Help</a></li>
-          <li><a href="http://vm-nutritionstudy.eecs.tufts.edu:8001/cart" id="cart-button">
+          <li><a href="http://vm-nutritionstudy.eecs.tufts.edu:<%=PORT%>/cart" id="cart-button">
                 <i class="fa fa-shopping-cart"></i> Cart 
                 <!-- only show cart count if not zero -->
                 <span class="badge"><% if (cart_count != 0) { %><%=cart_count%><%}%></span>
@@ -34,7 +36,10 @@
         <div class="clearfix"></div>
       </form>
     </div>
-      <div class="clearfix"> </div>
+    <div class="resource_display">
+      <% include timer_budget.ejs %>
+    </div>
+    <div class="clearfix"> </div>
     </div>
   </div>
 <!-- //header -->

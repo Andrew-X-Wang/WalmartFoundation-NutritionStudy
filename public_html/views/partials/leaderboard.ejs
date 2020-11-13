@@ -1,0 +1,79 @@
+<!doctype HTML>
+<style>
+  th:nth-child(odd), td:nth-child(odd) {
+    text-align: left;
+  }
+  th:nth-child(even), td:nth-child(even) {
+    text-align: right;
+  }
+  th, td {
+    font-size: 20;
+  }
+  .higher_score {
+    color: #000000;
+  }
+  .own_score {
+    color: #ff0d00;
+    background-color: #dddddd;
+  }
+  .lower_score {
+    color: #808080;
+  }
+</style>
+<div class="aisle-leaderboard" style="display: table-cell; width: 10%; vertical-align: top; padding-top: 10px;">
+    <div class="categories">
+        <h4 class="leaderboard-header" style="text-align: center; text-decoration: underline"> Leaderboard </h4>
+        <table>
+          <tr>
+            <th>User</th>
+            <th>Score</th>
+          </tr>
+          <% var in_top = false %>
+          <% var max_leaderboard_len = 10 %>
+          <% var leaderboard_size = Math.min(max_leaderboard_len, leaderboard.length) %>
+          <% var score_type = "higher_score" %>
+          <% var i = 0 %>
+          <% var place = i + 1 %>
+          <% for (i; i < leaderboard_size; i++) {%>
+            <tr>
+              <% if (leaderboard[i].user_id == user_id) { %>
+                <% score_type = "own_score"%>
+              <% } %>
+              <% place = i + 1 %>
+              <td class="<%=score_type%>"> <%=place%>.) <%=leaderboard[i].username%></td>
+              <td class="<%=score_type%>"> <%=leaderboard[i].health_total%></td>
+              <% if (leaderboard[i].user_id == user_id) { %>
+                <% score_type = "lower_score"%>
+                <% in_top = true %>
+              <% } %>
+            </tr>
+          <%} %>
+          <% if (!in_top) { %>
+            <% for (i; i < leaderboard.length; i ++) {%> 
+              <% if (leaderboard[i].user_id == user_id) { %>
+                <!-- If place isn't leader_length + 1: -->
+                <% if (i != max_leaderboard_len) { %>
+                  <tr>
+                    <td class="<%=score_type%>"> ...</td>
+                    <td class="<%=score_type%>"> ...</td>
+                  </tr>
+                <% } %>
+                <% score_type = "own_score" %>
+                <% break %>
+              <% } %>
+            <% } %>
+            <!-- If user outside of max number of users pulled: -->
+            <% if (i > leaderboard.length) { %>
+              <% place = "??" %>
+            <% } else {%>
+              <% place = i + 1 %>
+            <% } %>
+            <tr>
+              <td class="<%=score_type%>"> <%=place%>.) <%=leaderboard[i].username%></td>
+              <td class="<%=score_type%>"> <%=leaderboard[i].health_total%></td>
+            </tr>
+          <% } %>
+                </div>
+        </table>
+    </div>
+</div>

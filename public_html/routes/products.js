@@ -4,6 +4,22 @@ var con        = require('./database.js'); //in routes file already
 var async      = require('async');
 const perPage  = 12;
 
+var LEADER_SIZE = 100;
+
+/* How to put this in a separate file :( need to be used in both cart.js and here*/
+async function get_leaderboard () {
+    var get_leaderboard = "SELECT users.username, users.user_id, carts.health_total " + 
+                          "FROM users INNER JOIN carts " + 
+                          "ON users.cart_id=carts.cart_id order by health_total desc " + 
+                          "LIMIT ?;"
+    try {
+        var leaderboard = await con.query(get_leaderboard, [LEADER_SIZE]);
+    } catch (err) {
+        console.log(err);
+        res.send("ERROR");
+    }
+    return leaderboard;
+}
 
 /* auth to check if logged in */
 function auth (req, res, next) {
@@ -63,6 +79,7 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
     var offset      = (perPage * page) - perPage;
     filter          = (filter == "default" ? "price" : filter);
     var cart_id  = req.session.cart_id;
+    var user_id = req.session.user_id;
 
     var query_params  = product_parameters(category, subcategory, offset);
     var count_results = "SELECT COUNT(product_id) as numberOfProducts " +
@@ -77,19 +94,31 @@ router.get('/:category/:subcategory', auth, async function(req, res) {
         var page_result = await con.query(count_results, query_params["page_query"]);
         var total_pages = Math.ceil(page_result[0].numberOfProducts / perPage);
         var products    = await con.query(get_products, query_params["product_query"]);
-        var list        = await con.query(get_listItems, [cart_id]);
+        var list        = await con.query(get_listItems, [cart_id]);    
+        var leaderboard = await get_leaderboard();
 
         var header = category + " - " + subcategory;
         header     = header.replace(/_/g, " ");
     
+        console.log("USER_ID: " + user_id);
         var render_params = {
                 header       : header,
                 items        : products,
                 listItems    : list,
                 filter       : filter,
                 cart_count   : req.session.cart_count,
+                tracking_budget : req.session.tracking_budget,
+                tracking_time : req.session.tracking_time,
+                start_time : req.session.session_start_time,
+                total_time : req.session.total_time,
+                remaining_time : req.session.remaining_time,
+                total_budget : req.session.total_budget,
+                remaining_budget : req.session.remaining_budget,
+                checked_out : req.session.checked_out,
                 current_page : page,
-                pages        : (page <= total_pages ? total_pages : 0)
+                pages        : (page <= total_pages ? total_pages : 0),
+                leaderboard  : leaderboard,
+                user_id      : user_id
             }      
         res.render('sample-aisle', render_params);
 

@@ -201,7 +201,7 @@
   <div class="products">
       <%include partials/sidenav.ejs%>
       <div class = "product-right-container">
-      <div class = "products-right" style="display: table-cell; width: 80%; vertical-align: top">
+      <div class = "products-right" style="display: table-cell; width: 60%; vertical-align: top">
       <div class = "products-right-grid">
           <div class="products-right-grids">
             <div class="sorting">
@@ -262,6 +262,7 @@
           <% } %>
       
       </div>
+      <%include partials/leaderboard.ejs%>
 
       <div class="clearfix"> </div>
       <nav class="numbering">
@@ -302,8 +303,10 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="/js/bootstrap.min.js"></script>
 <script>
-var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:8001"
+var PORT = 8003;
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT
 var shoppingSelect = 0;
+var fadeTime = 300;
 
 function PostRequest() {
   var request;
@@ -416,14 +419,14 @@ $('.product-thumbnail-image').click( function () {
 
 function add_to_cart(item) {
 
-  var request = new PostRequest();
+  var post_request = new PostRequest();
 
   var data = "id="     + item.attr('data-id')   + 
              "&name="  + item.attr('data-name') +
              "&img="   + item.attr('data-img')  +
              "&price=" + item.attr('data-price');
 
-  request.makeRequest("cart/add", data, function(request){
+  post_request.makeRequest("cart/add", data, function(request){
 
       cart_count = request.responseText;
 
@@ -434,6 +437,25 @@ function add_to_cart(item) {
           $('.badge').text(cart_count);
         }
       }
+
+      post_request.makeRequest("cart/recalculate-totals", "", function(request) {
+        var totals = JSON.parse(request.responseText);
+        total = totals['total'];
+
+        /* Update remaining budget */
+        var newBudget = (<%=total_budget%> - total).toFixed(2);
+        if (newBudget < 0) {
+          var overBudget = (-newBudget).toFixed(2);
+          alert("This item puts you $" + overBudget + " over budget. You will not be able to checkout if you are over budget.");
+        }
+        var budgetData = "budget=" + newBudget;
+        post_request.makeRequest("cart/update-budget", budgetData, function(request) {
+          $('.budget_display').fadeOut(fadeTime, function() {
+            document.getElementById('budget_display').innerHTML = newBudget;
+            $('.budget_display').fadeIn(fadeTime);
+          });
+        });
+      });
   });
 }
 

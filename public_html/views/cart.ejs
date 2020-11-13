@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <%- include partials/header.ejs %>
+<%- include partials/header.ejs %>
 </head>
 <body>
 
 <%- include partials/topnav.ejs %>
-<div class="container">
-<div class="shopping-cart">
+<% var cart_width = "90%"%>
+<div class="directory_container">
+<div class="shopping-cart" style="flex-basis: 80%;">
   <table>
     <tr class="table-header">
       <th class="product-image">Image</th>
@@ -61,6 +62,11 @@
 </div>
 
 </div>
+
+<div class="Leaderboard" style="flex-basis: 20%; padding: 20px;">
+<%include partials/leaderboard.ejs%>
+</div>
+
 </div>
 
 <!-- //footer -->
@@ -69,12 +75,13 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script>
- /* Set rates + misc */
+/* Display cart totals, etc. */
 $( document ).ready(function() {
-    recalculateCart();
+    recalculateCart(true);
 });
 
-var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:8000"
+var PORT = 8003;
+var requestURL = "http://vm-nutritionstudy.eecs.tufts.edu:" + PORT;
 var taxRate = 0.05;
 var shippingRate = 9.00; 
 var fadeTime = 300;
@@ -86,12 +93,12 @@ function Request() {
     this.makeRequest = function(endpoint, data, callback) {
         request = new XMLHttpRequest();
         request.open("POST", requestURL + "/" + endpoint, true);
-
         request.onreadystatechange = 
             function () {
-                if(request.readyState === 4 && request.status === 200) {
+                if (request.readyState === 4 && request.status === 200) {
                     console.log("done with good request");
-                    callback(request);}
+                    callback(request);
+                }
             }
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         request.send(data);
@@ -113,31 +120,47 @@ $('.checkout').click( function() {
 });
 
 /* Recalculate cart */
-function recalculateCart() {
-    var subtotal = 0;
-    /* Sum up row totals */
-    $('.product').each(function () {
-        subtotal += parseFloat($(this).children('.product-line-price').text());
-    });
+function recalculateCart(onload=false) {
+    var cartTotalRequest = new Request();
+    cartTotalRequest.makeRequest("cart/recalculate-totals", "", function(request) {
+        var totals = JSON.parse(request.responseText);
+        var subtotal = totals['subtotal'];
+        var tax = totals['tax'];
+        var total = totals['total'];
 
-    /* Calculate totals */
-    var tax   = subtotal * taxRate;
-    var total = subtotal + tax;
+        /* Update totals display */
+        $('.totals-value').fadeOut(fadeTime, function() {
+            $('#cart-subtotal').html(subtotal.toFixed(2));
+            $('#cart-tax').html(tax.toFixed(2));
+            $('#cart-total').html(total.toFixed(2));
 
-    /* Update totals display */
-    $('.totals-value').fadeOut(fadeTime, function() {
-        $('#cart-subtotal').html(subtotal.toFixed(2));
-        $('#cart-tax').html(tax.toFixed(2));
-        $('#cart-total').html(total.toFixed(2));
+            if(total == 0){
+                $('.checkout').fadeOut(fadeTime);
+            }else{
+                $('.checkout').fadeIn(fadeTime);
+            }
 
-        if(total == 0){
-            $('.checkout').fadeOut(fadeTime);
-        }else{
-            $('.checkout').fadeIn(fadeTime);
+            $('.totals-value').fadeIn(fadeTime);
+        });
+
+        if (<%=tracking_budget%>) {
+            /* Update remaining budget */
+            var newBudget = (<%=total_budget%> - total).toFixed(2);
+            if (newBudget < 0) {
+                var overBudget = (-newBudget).toFixed(2);
+                var message_start = (onload) ? "You are currently $" : "This item puts you $";
+                alert(message_start + overBudget + " over budget. You will not be able to checkout if you are over budget.");
+            }
+            var budgetRequest = new Request();
+            var budgetData = "budget=" + newBudget;
+            budgetRequest.makeRequest("cart/update-budget", budgetData, function(request) {
+                $('.budget_display').fadeOut(fadeTime, function() {
+                    document.getElementById('budget_display').innerHTML = newBudget;
+                    $('.budget_display').fadeIn(fadeTime);
+                });
+            });            
         }
-
-        $('.totals-value').fadeIn(fadeTime);
-    });
+    })
 }
 
 
@@ -183,7 +206,6 @@ function removeItem(removeButton) {
 
     /* Post request to remove item from cart */
     request.makeRequest("cart/remove", data, function(request){
-
         /* Remove row from DOM and recalc cart total */
         product.slideUp(fadeTime, function() {
             product.remove();
@@ -204,15 +226,27 @@ function removeItem(removeButton) {
 
 /* Checkout items and create new empty cart for user */
 function checkoutCart(checkoutButton) {
+    if (<%=tracking_budget%>) {
+        /* Parsing out numerical value */
+        var curr_budget = $('.budget_display').text().match(/[-]?[\.\d]+/);
+        console.log("Current budget: " + curr_budget);
+        alert("CHECKING OUT");
+        if (curr_budget < 0) {
+            var overBudget = (-curr_budget).toFixed(2);
+            alert("You are $" + overBudget + " over budget, you must be at or below budget to check out.");
+            return;
+        }
+    }
+
     var request = new Request();
     console.log($(checkoutButton).parent().parent());
-    var data = $(checkoutButton).parent().parent(); // shopping cart div
+    var data = $(checkoutButton).parent().parent(); // shopping cart div; @TODO: is this data necessary to pass to api call?
 
     request.makeRequest("cart/checkout-cart", data, function(request) {
         cart_count = request.responseText;
         $('.badge').text(cart_count);
-        recalculateCart();
-        location.replace("http://vm-nutritionstudy.eecs.tufts.edu:8000/past-purchases");
+        recalculateCart(); //@TODO: is this necessary?
+        location.replace("http://vm-nutritionstudy.eecs.tufts.edu:" + PORT + "/past-purchases");
     });
 }
 
